@@ -1,0 +1,120 @@
+---
+title: "OCS2024 workshop: Setting up R and Rstudio"
+author: "Floriaan Devloo-Delva"
+format: 
+  pdf: 
+    theme: cosmo
+    keep-tex: true
+    toc: true
+    toc_depth: 3
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(formatR)
+library(tidyverse)
+
+knitr::opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = 72),
+                      cache = TRUE,
+                      echo = TRUE)
+```
+
+# Setting up R environments
+
+## Getting set up
+
+To begin, you should download and install R from the CRAN. This is the online hub for the R language and it stands for Comprehensive R Archive Network. Be sure to download the correct R installation for your operating system.
+
+[Dowload R here](https://cran.r-project.org/bin/)
+
+We also strongly recommend you install RStudio, a front-end for R. This utility makes working in the R environment a lot more straightforward, standardises things across operating systems and has many helpful features. For the purposes of these tutorials, we will assume you are using RStudio.
+
+[Dowload Rstudio here](https://posit.co/download/rstudio-desktop/)
+
+With both R and RStudio installed, start Rstudio and we will begin!
+
+**For this tutorial I use R version 4.2 and Rstudio version 2023.09.1, but newer versions work as well.**
+
+## Install packages
+
+If you have trouble installing packages try to "restart R" under "Session".
+
+Remember to read the error messages, sometimes you are missing a package not listed below.
+
+
+```{r, eval=FALSE}
+install.packages("dartRverse")
+install.packages("adegenet")
+install.packages("directlabel") #needed for PCA
+install.packages("networkD3") #needed for private allele analysis
+install.packages("related_1.0.tar.gz", 
+                 repos = NULL) # located in your working directory
+install.packages("devtools")
+devtools::install_github("kkeenan02/diveRsity")
+
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("snpStats", force = TRUE, update = FALSE) #for LD
+BiocManager::install("qvalue")
+BiocManager::install("SNPRelate")
+
+devtools::install_github('mijangos81/ggtern') # for HWE diagnostics
+devtools::install_github('green-striped-gecko/dartR.base', ref = "dev")
+devtools::install_github('green-striped-gecko/dartR.popgen', ref = "dev")
+devtools::install_github('green-striped-gecko/dartR.sexlinked', ref = "dev")
+
+```
+
+## Load packages
+
+```{r, warning=FALSE, message=FALSE}
+library(dartRverse)
+library(adegenet)
+library(diveRsity)
+library(snpStats) #only for LD
+library(ggtern) # for HWE diagnostics
+library(related)
+```
+
+## Test some key functions
+
+```{r}
+bandicoot.gl <- dartR.data::bandicoot.gl
+```
+
+
+```{r}
+fst.res <- dartR.base::gl.fst.pop(bandicoot.gl, nboots = 100, verbose = 0)
+fst.res$Fsts
+fst.res$Pvalues
+basic.stats <- dartR.base::utils.basic.stats(bandicoot.gl)
+basic.stats$overall
+
+source("gl2gpop_FDD.R")
+gl2gpop(bandicoot.gl, filename = "data/genepop.gen")
+migration <- diveRsity::divMigrate(infile = "data/genepop.gen", boots = 100, stat = "Nm", plot_network = TRUE, para = TRUE, filter_threshold = 0.2)
+colnames(migration$nmRelMig) <- adegenet::popNames(bandicoot.gl)
+rownames(migration$nmRelMig) <- adegenet::popNames(bandicoot.gl)
+migration$nmRelMig
+
+outliers <- dartR.popgen::gl.outflank(bandicoot.gl,
+                        plot = TRUE,
+                        LeftTrimFraction = 0.05,
+                        RightTrimFraction = 0.05,
+                        Hmin = 0.1,
+                        qthreshold = 0.05,)
+outliers$outflank$numberLowFstOutliers
+outliers$outflank$numberHighFstOutliers
+
+relate <- dartR.base::gl2related(bandicoot.gl, verbose = 0)
+pop.code <- substr(bandicoot.gl$pop, start = 1, stop = 2) #Related only takes 2 letter code for population
+relate$V1 <- paste0(pop.code, "_", relate$V1)
+
+pw.rel <- related::coancestry(relate, lynchli = 1, lynchrd = 1,trioml = 0L, dyadml = 0L,
+                               quellergt = 1, wang = 1, ritland = 1)
+```
+:::{.panel-tabset}
+
+:::
