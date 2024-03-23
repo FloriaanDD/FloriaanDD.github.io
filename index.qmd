@@ -1,0 +1,46 @@
+![](images/Illumina_logo.png)
+![](images/eDNA-Frontiers-logo.jpg)
+
+# Welcome! {.unnumbered}
+
+
+## Here are some things you might see along your journey:
+
+**Below is an exercise box, this is encouraging you to give it a go yourself!**
+
+::: callout-note
+## Exercise
+
+![](images/task.png){#id .class width="48" height="48"} Give the `code` a go!
+:::
+
+**Below is a tip box, with added insights for your journey.**
+
+::: callout-tip
+*take a look...*
+
+A variety of things to learn!
+:::
+
+**Below is a caution box, take note, this will keep you on your path.**
+
+::: callout-caution
+**Take CARE!** It is easy to go astray, I am here to help.
+:::
+
+**Below is a warning box! Be careful and take head of what it says.**
+
+::: callout-warning
+**NOTICE!** Thank you for noticing this **warning**!
+
+:::
+
+<br>
+
+## A big thank you to the developers from dartR for making their code available!
+
+DartR published first by @gruber_dartr, and dartR V2 published by @mijangos_dartr2
+
+The code presented here was developed by a group a people for the population genetic workshop in Kioloa. We express our sincere thanks to the following people for making this code available: **Arthur Georges, Bernd Gruber, Luis Mijangos, Renee Catullo, Oliver Berry, Andrzej Killian, Jason Carling, Andrew Kowalczyk, Bill Sherwin, Carlo Pacioni, Robyn Shaw, Catherine Grueber, Kate Farquharson, Luciano Beheregaray, Chris Brauer, Jonathan Sandoval-Castillo, Sally Potter, Craig Moritz, Diana Robledo-Ruiz, Natasha Marosi, Jinliang Wang**.
+
+![](images/funders_stakeholders.png)

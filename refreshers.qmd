@@ -1,0 +1,35 @@
+# Refreshers and dartR tutorials {.unnumbered}
+
+We thank Arthur George and Bernd Gruber from the dartRverse team to make these tutorials available.
+
+## `dartR` RStudio Refresher
+
+{{< pdf tutorials/Tutorial_1_dartR_RStudio_Refresher.pdf width=100% height=600 >}}
+
+## Data Structure and Input
+
+{{< pdf tutorials/Tutorial_3_dartR_Data_Structures_and_Input.pdf width=100% height=600 >}}
+
+## Data Manipulation
+
+{{< pdf tutorials/Tutorial_4_Data_Manipulation.pdf width=100% height=600 >}}
+
+## `dartR` Basic Filtering
+
+{{< pdf tutorials/Tutorial_5_dartR_Basic_Filtering.pdf width=100% height=600 >}}
+
+## Fixed Differences
+
+{{< pdf tutorials/TechNote_fixed_difference_analysis_25-Feb-22.pdf width=100% height=600 >}}
+
+
+## Extra resources 
+**These tutorials provide great examples of additional analyses.**
+
+["Population Genetics in R" by Kamvar et al. 2016](https://popgen.nescent.org/index.html)
+
+[Adegenet Tutorials by Thibaut Jombart](https://github.com/thibautjombart/adegenet/wiki/Tutorials)
+
+[evolutionary genetics tutorial](https://evolutionarygenetics.github.io/)
+
+["Computational Genomics with R" by Altuna Akalin](https://compgenomr.github.io/book/)
