@@ -521,7 +521,7 @@ The output of this function: provide information for different indices: allelic 
 
 In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g. all loci in HWE & equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes see @sherwin.
 
-```{r}
+```{r, warning=FALSE}
 divers <- dartR.base::gl.report.diversity(data.gl, table = FALSE, pbar = FALSE, verbose = 0)
 divers$one_H_alpha
 divers$one_H_beta
