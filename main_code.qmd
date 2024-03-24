@@ -10,7 +10,7 @@ knitr::opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = 72),
                       echo = TRUE)
 ```
 
-## Load packages
+# Load packages
 
 ```{r, warning=FALSE, message=FALSE}
 library(dartRverse)
@@ -89,8 +89,6 @@ save(data.gl, file = "data/raw_genlight.Rdata")
 The order of filtering can be important and requires some thought. The filtering steps may change depending on the analysis you intend to run. There is no one-fits-all approach to SNP filtering.
 
 ::: callout-warning
-## CAUTION
-
 Be careful not to over-filter. The objective is to get an appropriate balance between signal to noise ratio, not to eliminate noise altogether at the expense of also taking out some signal. This balance will depend on downstream application.
 
 *A good strategy is to undertake an exploratory analysis first, whereby you experiment with filtering. Perhaps start with very stringent filtering, examine the impact on the final analysis, then progressively reduce the stringency to select the minimal filtering regime that still delivers a stable outcome. Play with your data to get a feel for the balance between signal to noise ratio, in the context of the analyses you propose to subsequently undertake.*
@@ -104,13 +102,18 @@ DArT includes several technical replicates (\~30 %) of your samples to see how r
 
 **It is not advised to filter on reproducibility \> 0.99, since you are like to remove more heterozygous SNPs (i.e. more difficult to genotype consistently).**
 
+:::{.panel-tabset}
+##### Report reproducibility
 ```{r}
 dartR.base::gl.report.reproducibility(data.gl, verbose = 1)
+```
+##### Filter reproducibility
+```{r}
 data.gl <- dartR.base::gl.filter.reproducibility(data.gl, threshold = 0.98, 
                                                  plot.colors = c("#2171B5", "#6BAED6"),
                                                  verbose = 1)
 ```
-
+:::
 
 ### Invariable sites
 
@@ -128,27 +131,38 @@ data.gl <- dartR.base::gl.filter.allna(data.gl, verbose = 1)
 
 Looks for loci which are all 0 (or 1 or 2) over the all samples. These are not informative.
 
+:::{.panel-tabset}
+##### Report monomorphs
 ```{r}
 dartR.base::gl.report.monomorphs(data.gl, verbose = 1)
+```
+##### Filter monomorphs
+```{r}
 data.gl <- dartR.base::gl.filter.monomorphs(data.gl, verbose = 5)
 ```
+:::
 
 #### Minor Allele Frequency
 
 Some mutations only occur in a couple of individuals, these are not informative for population-level analyses. Loci with a low Minor Allele Frequency (MAF) might not be informative enough and just increase computation time.
 
 ::: callout-warning
-## CAUTION
-
 The threshold should be lower than the proportion of your smallest sampling location. For example, if one of your sample sites has 5 samples out of a total of 100 samples, the MAF should not be \< 0.05. Else, your risk loosing the informative markers that differntiate that population.
 :::
 
+:::{.panel-tabset}
+##### Report maf
 ```{r}
 dartR.base::gl.report.maf(data.gl, verbose = 1)
+```
+##### Filter maf
+```{r}
 data.gl <- dartR.base::gl.filter.maf(data.gl, threshold = 0.005, 
                                      plot.colors = c("#2171B5", "#6BAED6"),
                                      verbose = 1)
 ```
+:::
+
 
 ### Read depth
 
@@ -156,10 +170,17 @@ Read depth has a considerable influence on the veracity of SNP calls. The low va
 
 **Check the histogram to see how many SNP have low or high counts. Low counts might not be reliably genotyped. High counts may be due to paralogous fragments.**
 
+:::{.panel-tabset}
+##### Report rdepth
 ```{r}
 dartR.base::gl.report.rdepth(data.gl, verbose = 1)
+```
+##### Filter rdepth
+```{r}
 data.gl <- dartR.base::gl.filter.rdepth(data.gl, lower = 5, upper = 200, verbose = 1)
 ```
+:::
+
 
 ### Missing data for SNPs
 
@@ -167,82 +188,128 @@ Call rate is defined as `1 - proportion of missing data`. SNPs with too much mis
 
 Call Rate for SNPs can arise from two sources. The first source is where a missing value arises because the sequence tag bearing the target SNP cannot be amplified -- there has been a mutation at one or both of the restriction sites. The second source of missing values is where the read depth is insufficient to make a reliable call on the SNP. Either way, the SNP is not called and is recorded as NA. A first step in filtering on Call Rate is to examine the distribution of Call Rates across loci. We use the function `gl.report.callrate` to yield the following output and graph.
 
+:::{.panel-tabset}
+##### Report SNP callrate
 ```{r}
 dartR.base::gl.report.callrate(data.gl, method = "loc", verbose = 1)
+```
+##### Filter SNP callrate
+```{r}
 data.gl <- dartR.base::gl.filter.callrate(data.gl, method = "loc",  threshold = 0.8, verbose = 1)
 ```
+:::
+
 
 ### Missing data for individuals
 
 Call rate is defined as `1 - proportion of missing data`. Samples with degraded DNA will have a lot of missing sequencing data. These samples are unreliably sequenced and should be removed.
 
+:::{.panel-tabset}
+##### Report ind. callrate
 ```{r}
 dartR.base::gl.report.callrate(data.gl, method = "ind", verbose = 1)
+```
+##### Filter ind. callrate
+```{r}
 data.gl <- dartR.base::gl.filter.callrate(data.gl, method = "ind", threshold = 0.8, verbose = 1)
 ```
+:::
+
 
 ### Individual heterozygosity
 
 Delete individuals with a heterozygosity below or above the threshold. High heterozygosity could be due to DNA cross-contamination from other individuals. Low heterozygosity could be due to population structure, inbreeding or excess missing values (normally the latter should be filtered out already).
 
+:::{.panel-tabset}
+##### Report ind. heterozygosity
 ```{r}
 dartR.base::gl.report.heterozygosity(data.gl, method = "ind", verbose = 1)
+```
+##### Filter ind. heterozygosity
+```{r}
 data.gl <- dartR.base::gl.filter.heterozygosity(data.gl, t.lower = 0, t.upper = 0.3,  verbose = 1)
 ```
+:::
+
 
 ### Invariable sites
 
 When filtering has resulted in removal of some individuals or populations, variation at several loci may be lost. Some loci may even be scored as missing across all individuals. You may wish to remove these monomorphic loci from your dataset.
 
+:::{.panel-tabset}
+##### Filter missing data
 ```{r}
 data.gl <- dartR.base::gl.filter.allna(data.gl, verbose = 1)
+```
+##### Report monomorphs
+```{r}
 dartR.base::gl.report.monomorphs(data.gl, verbose = 1)
+```
+##### Filter monomorphs
+```{r}
 data.gl <- dartR.base::gl.filter.monomorphs(data.gl, verbose = 1)
 ```
+:::
+
 
 ### Linked loci
 
 SNPs that are close together will be inherited together. Consequently, linked SNPs are not independent and will bias the data by inflating the signal.
 
 ::: callout-tip
-## NOTE
-
 Do not filter on LD, if you aim to analyse you data of effective population size based on linkage disequilibrium.
 :::
 
 #### Short-distance linkage
 
-Sequence tags can contain more than one callable SNP marker. Because of their close proximity, these multiple SNPs within a single sequence tag (referred to in dartR as 'secondaries' are likely to be strongly linked (inherited together). This is problematic for many analyses, so one might wish to filter out the multiple SNPs to leave only one per sequence tag.
+Sequence tags can contain more than one callable SNP marker. Because of their close proximity, these multiple SNPs within a single sequence tag (referred to in dartR as **'secondaries'** are likely to be strongly linked (inherited together). This is problematic for many analyses, so one might wish to filter out the multiple SNPs to leave only one per sequence tag.
 
 This function removes SNPs on the same 70 bp sequence tag, it retains the SNP with the highest RepAvg (average reproducibility) andrAvgPIC (average polymorphic information content), respectively.
 
+:::{.panel-tabset}
+##### Report secondaries
 ```{r}
 dartR.base::gl.report.secondaries(data.gl, verbose = 1)
-data.gl <- dartR.base::gl.filter.secondaries(data.gl, method = "best", verbose = 1)
 ```
+
+##### Filter secondaries
+```{r}
+data.gl <- dartR.base::gl.filter.secondaries(data.gl, method = "best", verbose = 1)
+
+```
+:::
 
 #### Long-distance linkage
 
 **Not running this because it takes too long, but consider using this if you have many SNPs and a small genome.**
 
+:::{.panel-tabset}
+##### Report ld.map
 ```{r, eval=FALSE}
 ld.report <- dartR.base::gl.report.ld.map(data.gl, ld.stat = "R.squared", verbose = 1)
-ld.report$ld_stat <- ld.report$ld.stat
+# changes between ''.' and '_' depending on your version of snpStats
+ld.report$ld_stat <- ld.report$ld.stat 
 ld.report$locus_a.stat_keep <- ld.report$locus_a.stat.keep
 ld.report$locus_b.stat_keep <- ld.report$locus_b.stat.keep
+```
+##### Report ld
+```{r, eval=FALSE}
 dartR.base::gl.report.ld(data.gl, verbose = 1)
+```
+##### Filter
+```{r, eval=FALSE}
 data.gl <- dartR.base::gl.filter.ld(data.gl, ld.report, threshold = 0.25, verbose = 1)
 ```
+:::
 
-### Hardy-Weinberg equilibrium
+
+### Hardy-Weinberg Equilibrium
 
 The Hardy--Weinberg equilibrium (HWE) states that allele and genotype frequencies in a population will remain constant from generation to generation in the absence of other evolutionary influences. SNPs that are sampled from a population in demographic equilibrium are expected to follow this equation: $p^2 + 2pq + q^2 = 1$, where $p$ is the frequency of the major allele (A) and $q$ is frequency of the minor allele (a).
 
 In the simplest case of a single locus with two alleles denoted A and a with frequencies $f(A) = p$ and $f(a) = q$, respectively, the expected genotype frequencies under random mating are $f(AA) = p^2$ for the AA homozygotes, $f(aa) = q^2$ for the aa homozygotes, and $f(Aa) = 2pq$ for the heterozygotes.
 
 ::: callout-warning
-## NOTE!
-
 There are several factors that can cause deviations from Hardy-Weinberg proportions including:
 
 -   Mutations
@@ -258,16 +325,28 @@ There are several factors that can cause deviations from Hardy-Weinberg proporti
 Therefore, testing for Hardy-Weinberg proportions should be a process that involves a careful evaluation of the results, a good place to start is Waples (2015). Note that tests for H-W proportions are only valid if there is no population substructure (assuming random mating) and have sufficient power only when there is sufficient sample size (n individuals \> 15).
 :::
 
+:::{.panel-tabset}
+##### hwe diagnostics
 ```{r}
 dartR.base::gl.diagnostics.hwe(data.gl, verbose = 1)
+```
+##### Report hwe
+```{r}
 dartR.base::gl.report.hwe(data.gl, verbose = 1)
+```
+##### Filter hwe
+```{r}
 data.gl <- dartR.base::gl.filter.hwe(data.gl, n.pop.threshold = 3, 
                                      mult.comp.adj = TRUE, 
                                      mult.comp.adj.method = "BH", 
                                      verbose = 1)
 ```
+:::
+
 
 ### Remove duplicate individuals
+
+Since DArT includes technical replicates and you could potentially recapture individuals, it important to remove replicate individuals. Duplicates individuals will inflate the signal you are investigating.
 
 ```{r}
 res_dup <- dartR.base::gl.report.replicates(data.gl,loc_threshold = 500, perc_geno = 0.85)
@@ -285,11 +364,9 @@ Possibly the most influential consideration on filtering is the purpose for whic
 
 -   If your focus is on ***Genome-wide Association Studies (GWAS)*** or identifying ***loci under selection***, then noise in the data will not associate with phenotype, and so filtering can be less stringent in order to maximize the chances of identifying promising associations.
 
--   ***Principal Coordinates Analysis*** PCA (and to a lesser extent, ***Principal Components Analysis***, PCoA), rely on fully populated data matrices (no missing values). Classical PCA for example, cannot easily accommodate missing values. To overcome this, a balance must be struck between filtering on Call Rate and imputing the values of those missing values that remain. More stringent filtering on Call Rate, and less imputation; but more stringent filtering on Call Rate, more loss of potentially useful information or valuable samples. Refer to Georges et al. (2023, BioxRiv <https://doi.org/10.1101/2023.03.22.533737>) for further discussion of this point.
+-   ***Principal Coordinates Analysis*** PCA (and to a lesser extent, ***Principal Components Analysis***, PCoA), rely on fully populated data matrices (no missing values). Classical PCA for example, cannot easily accommodate missing values. To overcome this, a balance must be struck between filtering on Call Rate and imputing the values of those missing values that remain. More stringent filtering on Call Rate, and less imputation; but more stringent filtering on Call Rate, more loss of potentially useful information or valuable samples. Refer to @Georges2023 for further discussion of this point.
 
 ::: callout-tip
-## IMPORTANT!
-
 There is no hard and fast rule to guide decisions on filtering SNP datasets prior to a substantive analysis. The decisions are based on comparing the distribution of the parameters to be filtered (using one of the gl.report functions) and the purpose to which the filtered dataset is to be put. Sequencing volume can constrain options, and the likelihood of some level of contamination of samples or presence of inhibitors of the restriction enzymes can have a bearing on the decisions. It is important not to over filter because of the risk of introducing a level of systematic bias and because of the unnecessary loss of informative loci or individuals. An experimental approach is recommended, whereby different filtering regimes are tried (from stringent to less stringent) and checked for influence on analysis outcomes.
 :::
 
@@ -378,7 +455,7 @@ Genetic variability of populations of a species is important because it can be t
 
 Ho Hs Ht Dst Htp Dstp Fst Fstp Fis Dest Gst_max Gst_H
 
-For all indexes, the entropies (H) and Hill numbers (D) are calculated. In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g. all loci in HWE & equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below (sherwin et al 2017). Error bars are +/- 1 standard deviation.
+For all indexes, the entropies (H) and Hill numbers (D) are calculated. In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g. all loci in HWE & equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below @sherwin. Error bars are +/- 1 standard deviation.
 
 The third term refers to whether the diversity is calculated within populations (alpha) or between populations (beta).
 
@@ -388,6 +465,8 @@ allelic richness (q = 0), Shannon information (q = 1), and heterozygosity (q = 2
 basic.stats <- dartR.base::utils.basic.stats(data.gl)
 basic.stats$overall
 colMeans(basic.stats$Ho, na.rm = TRUE) #observed heterozygosity
+
+hets <- gl.report.heterozygosity(data.gl, method="pop")
 
 divers <- dartR.base::gl.report.diversity(data.gl, table = FALSE, pbar = FALSE, verbose = 0)
 divers$one_H_alpha
@@ -403,16 +482,16 @@ divers$one_H_beta
 
 -   Which population has the lowest genetic diversity? What would this mean for the population?
 
--   Is inbreeding prominent in any population? What could cause this?
+-   Is inbreeding (FIS) prominent in any population? What could cause this?
 :::
 
 # Population connectivity
 
-`divMigrate` uses the method described in Sundqvist *et al.,* 2013 to plot the relative migration levels between population samples.
+`divMigrate` uses the method described in @sundqvist_divmigrate to plot the relative migration levels between population samples.
 
 Nm (i.e., the effective number of migrants). This statistic incorporates complementary information from both Gst and D, suggesting it may be a more generally suitable measure of migration. When using Nm for calculating the percent of correct directions in the different simulation scenarios.
 
-Alternatively, the number of private alleles provides an indication of genetic isolation. We use private alleles or alleles only present in one population as a sign of no migration.
+Alternatively, the number of private alleles provides an indication of genetic isolation. We use private alleles (i.e. alleles only present in one population) as a sign of no migration.
 
 ```{r}
 source("gl2gpop_FDD.R")
@@ -445,8 +524,6 @@ dartR.base::gl.report.pa(data.gl, plot.display = TRUE, verbose = 0)
 Understanding natural selection is fundamental to properly understanding evolution. The basics of natural selection are relatively straightforward but surprisingly easily misunderstood. Our aim with this practical session is to use the R environment to actually demonstrate different methods to detect signals of selection.
 
 ::: callout-important
-## IMPORTANT
-
 Both analyses to identify natural selection are much stronger if you have reference genome for your species, so you can pinpoint the genes and their functions that are being selected.
 :::
 
@@ -562,7 +639,6 @@ Below is a table modified from @speed2015_relatedness showing kinship values, an
 
 
 ::: callout-warning
-# Careful
 Relatedness/kinship are not absolute states but are estimated relative to a reference population for which there is generally little information, so that we can estimate the kinship of a pair of individuals only relative to some other quantity.
 
 Testing relatedness and kinship in your data can be very tricky. Relatedness estimates can be strongly biased by: bad genotyping, DNA contamination, populations structure, inbreeding, etc.
@@ -573,7 +649,7 @@ Previous studies showed that around 5,000 SNPs are sufficient to accurately esti
 
 ## Convert data
 
-There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, etc. For this example, we use the `related` package @pew_related.
+There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, etc. For this example, we use the `related` package @pew_related.
 
 ```{r}
 relate <- dartR.base::gl2related(data.gl, verbose = 0)
@@ -621,6 +697,15 @@ hist.plot <- ggplot2::ggplot(plot.data[plot.data$measurement > 0.1 &
                 y = "Frequency")
 print(hist.plot)
 ```
+
+::: callout-note
+## Exercise
+
+Why do you have negative relatedness?
+
+Why do some populations have very high relatedness?
+
+:::
 
 ## One population
 
@@ -688,18 +773,18 @@ print(load("data/Bull_shark_DArTseq_genlight_for_Sex-linked_markers.Rdata"))
 print(load("data/Blue_shark_DArTseq_genlight_for_sex-linked_markers.Rdata"))
 ```
 
-### Run `filter.sex.linked`
+### Run `gl.filter.sexlinked`
 
 ![Markers on X and Y chromosomes](images/XY.png)
 
 ```{r, results="hold"}
-res <- dartR.sexlinked::filter.sex.linked(gl = data.gl, system = "xy", plots = TRUE, ncores = 1)
+res <- dartR.sexlinked::gl.filter.sexlinked(gl = data.gl, system = "xy", plots = TRUE, ncores = 1)
 ```
 
-### Run `infer.sex`
+### Run `gl.infer.sex`
 
 ```{r}
-sexID <- dartR.sexlinked::infer.sex(gl_sex_filtered = res, system = "xy", seed = 124)
+sexID <- dartR.sexlinked::gl.infer.sex(gl_sex_filtered = res, system = "xy", seed = 124)
 knitr::kable(head(sexID))
 ```
 

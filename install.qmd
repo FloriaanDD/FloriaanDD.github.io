@@ -32,6 +32,7 @@ If you have trouble installing packages try to "restart R" under "Session".
 
 Remember to read the error messages, sometimes you are missing a package not listed below.
 
+If you have issues installing the `related` package (e.g. on Mac), you can find more instructions [here](https://github.com/timothyfrasier/related).
 
 ```{r, eval=FALSE}
 install.packages("dartRverse")
@@ -68,6 +69,8 @@ library(related)
 ```
 
 ### Test several key functions
+
+You can test if the packages were installed properly by running some functions on a test dataset from dartR.
 
 ```{r}
 bandicoot.gl <- dartR.data::bandicoot.gl
