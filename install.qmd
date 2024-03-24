@@ -57,6 +57,12 @@ devtools::install_github('green-striped-gecko/dartR.sexlinked', ref = "dev")
 
 ```
 
+
+::: callout-tip
+You can check the packages (and versions) that I used for this tutorial under the `Let's get started` tab, at the bottom: `Session information`.
+:::
+
+
 ### Load packages
 
 ```{r, warning=FALSE, message=FALSE}
