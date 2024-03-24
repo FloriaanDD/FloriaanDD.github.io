@@ -304,7 +304,7 @@ div.csl-indent {
 </ol>
 <section id="bull-shark" class="level2">
 <h2 class="anchored" data-anchor-id="bull-shark">Bull shark</h2>
-<p>Data from <span class="citation" data-cites="devloo_bull">Devloo-Delva, Burridge, et al. (<a href="references.html#ref-devloo_bull" role="doc-biblioref">2023</a>)</span></p>
+<p>Data from <span class="citation" data-cites="devloo_bull">Devloo-Delva, Burridge, et al. (<a href="references.html#ref-devloo_bull" role="doc-biblioref">2023</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Bull_Shark.jpg" class="img-fluid figure-img"></p>
@@ -318,7 +318,7 @@ div.csl-indent {
 </section>
 <section id="northern-river-shark" class="level2">
 <h2 class="anchored" data-anchor-id="northern-river-shark">Northern River shark</h2>
-<p>Data from <span class="citation" data-cites="feutry_glyphis">Feutry et al. (<a href="references.html#ref-feutry_glyphis" role="doc-biblioref">2020</a>)</span></p>
+<p>Data from <span class="citation" data-cites="feutry_glyphis">Feutry et al. (<a href="references.html#ref-feutry_glyphis" role="doc-biblioref">2020</a>)</span>.</p>
 <p>Around 470 <em>G. garricki</em> samples were collected from 11 different sampling locations in Northern Australia and Papua New Guinea.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -333,7 +333,7 @@ div.csl-indent {
 </section>
 <section id="blue-shark" class="level2">
 <h2 class="anchored" data-anchor-id="blue-shark">Blue shark</h2>
-<p>Data from <span class="citation" data-cites="nikolic_blue">Nikolic et al. (<a href="references.html#ref-nikolic_blue" role="doc-biblioref">2023</a>)</span></p>
+<p>Data from <span class="citation" data-cites="nikolic_blue">Nikolic et al. (<a href="references.html#ref-nikolic_blue" role="doc-biblioref">2023</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Blue_shark.jpg" class="img-fluid figure-img"></p>
@@ -348,7 +348,7 @@ div.csl-indent {
 </section>
 <section id="reading-and-filtering-raw-data" class="level1">
 <h1>Reading and filtering raw data</h1>
-<p>For the purpose of this workshop we will use the <code>dartRverse</code> packages to read and filter the data <span class="citation" data-cites="gruber_dartr">Gruber et al. (<a href="references.html#ref-gruber_dartr" role="doc-biblioref">2018</a>)</span> <span class="citation" data-cites="mijangos_dartr2">Mijangos et al. (<a href="references.html#ref-mijangos_dartr2" role="doc-biblioref">2022</a>)</span> .</p>
+<p>For the purpose of this workshop we will use the <code>dartRverse</code> packages to read and filter the data <span class="citation" data-cites="gruber_dartr mijangos_dartr2">(<a href="references.html#ref-gruber_dartr" role="doc-biblioref">Gruber et al. 2018</a>; <a href="references.html#ref-mijangos_dartr2" role="doc-biblioref">Mijangos et al. 2022</a>)</span>.</p>
 <section id="import-data" class="level2">
 <h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <div class="cell" data-hash="main_code_cache/html/unnamed-chunk-5_a8ba1db3a6018683b4ce9ded05f2b4f2">
@@ -1539,7 +1539,33 @@ Exercise
 <section id="genetic-diversity" class="level1">
 <h1>Genetic diversity</h1>
 <p>Genetic variability of populations of a species is important because it can be thought of an indirect measure of the evolvability of those populations. The greater the genetic diversity of a population the bigger the amount of genetic raw material upon which selection can act. A population deprived of its genetic variability is less likely to respond to environmental changes and more vulnerable to the negative effects of inbreeding. From a theoretical point of you measuring (correctly) genetic diversity of a population and comparing it among different naturally occurring or human driven treatments might be important to test the theoretical predictions on impact of drift on effect of population size of relatively isolated (small) populations and on mechanisms of genetic variance (diversity) maintenance. From the conservation point of view the relative genetic diversity of population differentially affected by human intervention might give insight into how resilient populations of a species are to rapid changes of the habitat in which they live.</p>
-<p>Ho Hs Ht Dst Htp Dstp Fst Fstp Fis Dest Gst_max Gst_H</p>
+<ul>
+<li><p><strong>Ho = Observed heterozygosity</strong></p>
+<p><span class="math inline">\(Ho= 1-\sum_k \sum_i Pkii/np\)</span></p>
+<p>where <span class="math inline">\(Pkii\)</span> represents the proportion of homozygote <span class="math inline">\(i\)</span> in sample <span class="math inline">\(k\)</span> and <span class="math inline">\(np\)</span> the number of samples.</p></li>
+<li><p><strong>Hs = Within population gene diversity (sometimes misleadingly called expected heterozygosity, He)</strong></p>
+<p><span class="math inline">\(Hs=\tilde{n}/(\tilde{n}-1)[1-\sum_i\bar{p_i^2}-Ho/2\tilde{n}]\)</span></p>
+<p>where <span class="math inline">\(\tilde{n}=np/\sum_k 1/n_k\)</span> and <span class="math inline">\(\bar{p_i^2}=\sum_k p_{ki}^2/np\)</span></p></li>
+<li><p><strong>Ht = Overall gene diversity</strong></p>
+<p><span class="math inline">\(Ht= 1-\sum_i\bar{p_i}^2+Hs/(\tilde{n} np)-Ho/(2\tilde{n}np)\)</span></p>
+<p>where <span class="math inline">\(\bar{p_i}=\sum_kp_{ki}/np\)</span>.</p></li>
+<li><p><strong>Dst = Amount of gene diversity among samples</strong></p>
+<p><span class="math inline">\(Dst=Ht-Hs\)</span></p></li>
+<li><p><strong>Htp = corrected Ht</strong></p>
+<p><span class="math inline">\(Ht'=Hs+Dst'\)</span></p></li>
+<li><p><strong>Dstp = Corrected Dst</strong></p>
+<p><span class="math inline">\(Dst'=np/(np-1)Dst\)</span></p></li>
+<li><p><strong>Fst = Fixation index</strong></p>
+<p><span class="math inline">\(Fst=Dst/Ht\)</span> (This is not the same as Nei’s <span class="math inline">\(Gst\)</span>)</p></li>
+<li><p><strong>Fstp = Corrected Fst</strong></p>
+<p><span class="math inline">\(Fst'=Dst'/Ht'\)</span></p></li>
+<li><p><strong>Fis = Inbreeding coefficient</strong></p>
+<p><span class="math inline">\(Fis=1-Ho/Hs\)</span></p></li>
+<li><p><strong>Dest = a measure of population differentiation as defined by <span class="citation" data-cites="jost2008gst">Jost (<a href="references.html#ref-jost2008gst" role="doc-biblioref">2008</a>)</span></strong></p>
+<p><span class="math inline">\(Dest=np/(np-1) (Ht'-Hs)/(1-Hs)\)</span></p>
+<p>where <span class="math inline">\(p_{ki}\)</span> are unweighted by sample size.</p></li>
+<li><p><strong>Gst = an estimator of <span class="math inline">\(Fst\)</span> based on allele frequencies only</strong></p></li>
+</ul>
 <div class="cell" data-hash="main_code_cache/html/unnamed-chunk-36_06e8afadb430f58deae0fd2b714edca1">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>basic.stats <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">utils.basic.stats</span>(data.gl)</span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>basic.stats<span class="sc">$</span>overall</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1593,9 +1619,9 @@ Van Diemen Gulf  0.003961 0.240337 0.186551 0.003966  0.010817 0.106491    NA
 Completed: gl.report.heterozygosity </code></pre>
 </div>
 </div>
-<p>Some alternate measures for genetic diversity are more comparable between datasets.This is provided by the <code>gl.report.diversity</code> function.</p>
+<p><strong>Some alternate measures for genetic diversity are more comparable between datasets.This is provided by the <code>gl.report.diversity</code> function.</strong></p>
 <p>The output of this function: provide information for different indices: allelic richness (q = 0), Shannon information (q = 1), and heterozygosity (q = 2); within (alpha) or between (beta) populations. For all indexes, the entropies (H) and Hill numbers (D) are calculated.</p>
-<p>In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g.&nbsp;all loci in HWE &amp; equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below <span class="citation" data-cites="sherwin">Sherwin et al. (<a href="references.html#ref-sherwin" role="doc-biblioref">2017</a>)</span>.</p>
+<p>In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g.&nbsp;all loci in HWE &amp; equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes see <span class="citation" data-cites="sherwin">Sherwin et al. (<a href="references.html#ref-sherwin" role="doc-biblioref">2017</a>)</span>.</p>
 <div class="cell" data-hash="main_code_cache/html/unnamed-chunk-37_dd9a1686384c70753e32a71ae037c1fb">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>divers <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl.report.diversity</span>(data.gl, <span class="at">table =</span> <span class="cn">FALSE</span>, <span class="at">pbar =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -1967,7 +1993,7 @@ popPapua New Guinea  popVan Diemen Gulf
 </section>
 <section id="relatedness" class="level1">
 <h1>Relatedness</h1>
-<p>Two alleles are identical by descent (IBD) if they are identical copies of the same ancestral allele in a base population. Relatedness is the proportion of alleles shared between individuals that are IBD. Kinship is the probability that two alleles, one taken at random from each individual, are IBD <span class="citation" data-cites="wang2022_kinship">Wang (<a href="references.html#ref-wang2022_kinship" role="doc-biblioref">2022</a>)</span>. Kinship considers half the genetic information because it looks at the probability that one individual inherits a particular allele from a common ancestor shared with another individual. Therefore, kinship is equal to half of relatedness.</p>
+<p>Two alleles are identical by descent (IBD) if they are identical copies of the same ancestral allele in a base population. Relatedness is the proportion of alleles shared between individuals that are IBD. Kinship is the probability that two alleles, one taken at random from each individual, are IBD <span class="citation" data-cites="wang2022_kinship">(<a href="references.html#ref-wang2022_kinship" role="doc-biblioref">Wang 2022</a>)</span>. Kinship considers half the genetic information because it looks at the probability that one individual inherits a particular allele from a common ancestor shared with another individual. Therefore, kinship is equal to half of relatedness.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2067,12 +2093,12 @@ Warning
 <div class="callout-body-container callout-body">
 <p>Relatedness/kinship are not absolute states but are estimated relative to a reference population for which there is generally little information, so that we can estimate the kinship of a pair of individuals only relative to some other quantity.</p>
 <p>All relatedness estimates assume the true allele frequencies of your natural populations are known. But <strong>small samples size, missing data, DNA contamination, populations structure, inbreeding, and the presence of related individuals</strong> in your data will bias your frequency distributions.</p>
-<p>Previous studies showed that around 5,000 SNPs are sufficient to accurately estimate relatedness and kinship <span class="citation" data-cites="goudet_kiship">Goudet, Kay, and Weir (<a href="references.html#ref-goudet_kiship" role="doc-biblioref">2018</a>)</span>.</p>
+<p>Previous studies showed that around 5,000 SNPs are sufficient to accurately estimate relatedness and kinship <span class="citation" data-cites="goudet_kiship">(<a href="references.html#ref-goudet_kiship" role="doc-biblioref">Goudet, Kay, and Weir 2018</a>)</span>.</p>
 </div>
 </div>
 <section id="convert-data" class="level2">
 <h2 class="anchored" data-anchor-id="convert-data">Convert data</h2>
-<p>There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, PC-Relate, etc. For this example, we use the <code>related</code> package <span class="citation" data-cites="pew_related">Pew et al. (<a href="references.html#ref-pew_related" role="doc-biblioref">2015</a>)</span>.</p>
+<p>There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, PC-Relate, etc. For this example, we use the <code>related</code> package <span class="citation" data-cites="pew_related">(<a href="references.html#ref-pew_related" role="doc-biblioref">Pew et al. 2015</a>)</span>.</p>
 <div class="cell" data-hash="main_code_cache/html/unnamed-chunk-41_973d640b0698d3a811475c21d97e9faf">
 <div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>relate <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl2related</span>(data.gl, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
 <span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>pop.code <span class="ot">&lt;-</span> <span class="fu">substr</span>(data.gl<span class="sc">$</span>pop, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">2</span>) <span class="co">#Related only takes 2 letter code for population</span></span>
@@ -2884,6 +2910,9 @@ Goudet, Jérôme, Tomas Kay, and Bruce S. Weir. 2018. <span>“How to Estimate K
 </div>
 <div id="ref-gruber_dartr" class="csl-entry" role="listitem">
 Gruber, B., P. J. Unmack, O. F. Berry, and A. Georges. 2018. <span>“Dartr: An r Package to Facilitate Analysis of SNP Data Generated from Reduced Representation Genome Sequencing.”</span> Journal Article. <em>Molecular Ecology Resources</em> 18 (3): 691–99. <a href="https://doi.org/10.1111/1755-0998.12745">https://doi.org/10.1111/1755-0998.12745</a>.
+</div>
+<div id="ref-jost2008gst" class="csl-entry" role="listitem">
+Jost, Lou. 2008. <span>“GST and Its Relatives Do Not Measure Differentiation.”</span> <em>Molecular Ecology</em> 17 (18): 4015–26.
 </div>
 <div id="ref-mijangos_dartr2" class="csl-entry" role="listitem">
 Mijangos, Jose Luis, Bernd Gruber, Oliver Berry, Carlo Pacioni, and Arthur Georges. 2022. <span>“dartR V2: An Accessible Genetic Analysis Platform for Conservation, Ecology and Agriculture.”</span> Journal Article. <em>Methods in Ecology and Evolution</em> 13 (10): 2150–58. https://doi.org/<a href="https://doi.org/10.1111/2041-210X.13918">https://doi.org/10.1111/2041-210X.13918</a>.

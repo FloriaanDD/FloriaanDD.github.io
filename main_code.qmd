@@ -33,7 +33,7 @@ We have made three dataset available for this tutorial. **Pick one:**
 
 ## Bull shark
 
-Data from @devloo_bull 
+Data from @devloo_bull.
 
 ![The Bull Shark](images/Bull_Shark.jpg)
 
@@ -44,7 +44,7 @@ metadata.file <- "data/Bull_shark_DArTcap_metadata.csv"
 
 ## Northern River shark
 
-Data from @feutry_glyphis
+Data from @feutry_glyphis.
 
 Around 470 *G. garricki* samples were collected from 11 different sampling locations in Northern Australia and Papua New Guinea.
 
@@ -57,7 +57,7 @@ metadata.file <- "data/Northern_river_shark_DArTcap_metadata.csv"
 
 ## Blue shark
 
-Data from @nikolic_blue
+Data from @nikolic_blue.
 
 ![The Blue Shark](images/Blue_shark.jpg)
 
@@ -68,7 +68,7 @@ metadata.file <- "data/Blue_shark_DArTseq_metadata.csv"
 
 # Reading and filtering raw data
 
-For the purpose of this workshop we will use the `dartRverse` packages to read and filter the data @gruber_dartr @mijangos_dartr2 .
+For the purpose of this workshop we will use the `dartRverse` packages to read and filter the data [@gruber_dartr; @mijangos_dartr2].
 
 ## Import data
 
@@ -453,7 +453,58 @@ fixed.diff$fd
 
 Genetic variability of populations of a species is important because it can be thought of an indirect measure of the evolvability of those populations. The greater the genetic diversity of a population the bigger the amount of genetic raw material upon which selection can act. A population deprived of its genetic variability is less likely to respond to environmental changes and more vulnerable to the negative effects of inbreeding. From a theoretical point of you measuring (correctly) genetic diversity of a population and comparing it among different naturally occurring or human driven treatments might be important to test the theoretical predictions on impact of drift on effect of population size of relatively isolated (small) populations and on mechanisms of genetic variance (diversity) maintenance. From the conservation point of view the relative genetic diversity of population differentially affected by human intervention might give insight into how resilient populations of a species are to rapid changes of the habitat in which they live.
 
-Ho Hs Ht Dst Htp Dstp Fst Fstp Fis Dest Gst_max Gst_H
+  * **Ho = Observed heterozygosity**
+
+      $Ho= 1-\sum_k \sum_i  Pkii/np$
+      
+      where $Pkii$ represents the proportion of homozygote $i$ in sample $k$ and $np$ the number of samples.
+
+  * **Hs = Within population gene diversity (sometimes misleadingly called expected heterozygosity, He)**
+
+      $Hs=\tilde{n}/(\tilde{n}-1)[1-\sum_i\bar{p_i^2}-Ho/2\tilde{n}]$
+      
+      where $\tilde{n}=np/\sum_k 1/n_k$ and $\bar{p_i^2}=\sum_k p_{ki}^2/np$
+
+
+  * **Ht = Overall gene diversity**
+
+      $Ht= 1-\sum_i\bar{p_i}^2+Hs/(\tilde{n} np)-Ho/(2\tilde{n}np)$
+      
+      where $\bar{p_i}=\sum_kp_{ki}/np$.
+
+  * **Dst = Amount of gene diversity among samples**
+
+      $Dst=Ht-Hs$
+
+  * **Htp = corrected Ht**
+
+      $Ht'=Hs+Dst'$
+  
+  * **Dstp = Corrected Dst**
+  
+      $Dst'=np/(np-1)Dst$
+
+  * **Fst = Fixation index**
+
+      $Fst=Dst/Ht$ (This is not the same as Nei's $Gst$)
+
+  * **Fstp = Corrected Fst**
+
+      $Fst'=Dst'/Ht'$
+
+
+  * **Fis = Inbreeding coefficient**
+
+      $Fis=1-Ho/Hs$
+
+
+  * **Dest =  a measure of population differentiation as defined by @jost2008gst**
+
+      $Dest=np/(np-1) (Ht'-Hs)/(1-Hs)$
+      
+      where $p_{ki}$ are unweighted by sample size.
+
+  * **Gst = an estimator of $Fst$ based on allele frequencies only**
 
 
 ```{r, warning=FALSE}
@@ -464,11 +515,11 @@ colMeans(basic.stats$Ho, na.rm = TRUE) #observed heterozygosity
 hets <- gl.report.heterozygosity(data.gl, method = "pop")
 ```
 
-Some alternate measures for genetic diversity are more comparable between datasets.This is provided by the `gl.report.diversity` function.
+**Some alternate measures for genetic diversity are more comparable between datasets.This is provided by the `gl.report.diversity` function.**
 
 The output of this function: provide information for different indices: allelic richness (q = 0), Shannon information (q = 1), and heterozygosity (q = 2); within (alpha) or between (beta) populations. For all indexes, the entropies (H) and Hill numbers (D) are calculated.
 
-In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g. all loci in HWE & equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below @sherwin.
+In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g. all loci in HWE & equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes see @sherwin.
 
 ```{r}
 divers <- dartR.base::gl.report.diversity(data.gl, table = FALSE, pbar = FALSE, verbose = 0)
@@ -622,7 +673,7 @@ print(length(cand1) + length(cand2))
 
 # Relatedness
 
-Two alleles are identical by descent (IBD) if they are identical copies of the same ancestral allele in a base population. Relatedness is the proportion of alleles shared between individuals that are IBD. Kinship is the probability that two alleles, one taken at random from each individual, are IBD @wang2022_kinship. Kinship considers half the genetic information because it looks at the probability that one individual inherits a particular allele from a common ancestor shared with another individual. Therefore, kinship is equal to half of relatedness.
+Two alleles are identical by descent (IBD) if they are identical copies of the same ancestral allele in a base population. Relatedness is the proportion of alleles shared between individuals that are IBD. Kinship is the probability that two alleles, one taken at random from each individual, are IBD [@wang2022_kinship]. Kinship considers half the genetic information because it looks at the probability that one individual inherits a particular allele from a common ancestor shared with another individual. Therefore, kinship is equal to half of relatedness.
 
 ::: callout-tip
 Below is a table modified from @speed2015_relatedness showing kinship coefficients ($\theta$), and their confidence intervals (CI), and relatedness values for different relationships.
@@ -651,7 +702,7 @@ Relatedness/kinship are not absolute states but are estimated relative to a refe
 
 All relatedness estimates assume the true allele frequencies of your natural populations are known. But **small samples size, missing data, DNA contamination, populations structure, inbreeding, and the presence of related individuals** in your data will bias your frequency distributions.
 
-Previous studies showed that around 5,000 SNPs are sufficient to accurately estimate relatedness and kinship @goudet_kiship.
+Previous studies showed that around 5,000 SNPs are sufficient to accurately estimate relatedness and kinship [@goudet_kiship].
 :::
 
 
@@ -659,7 +710,7 @@ Previous studies showed that around 5,000 SNPs are sufficient to accurately esti
 
 ## Convert data
 
-There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, PC-Relate, etc. For this example, we use the `related` package @pew_related.
+There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, PC-Relate, etc. For this example, we use the `related` package [@pew_related].
 
 ```{r}
 relate <- dartR.base::gl2related(data.gl, verbose = 0)
