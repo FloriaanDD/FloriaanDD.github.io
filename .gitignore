@@ -2,5 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+main_code_cache/
 
 /.quarto/
