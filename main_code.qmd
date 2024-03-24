@@ -12,6 +12,8 @@ knitr::opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = 72),
 
 # Load packages
 
+These are the main packages we will be using today. Please check the `Install packages` tab for details.
+
 ```{r, warning=FALSE, message=FALSE}
 library(dartRverse)
 library(adegenet)
