@@ -360,7 +360,7 @@ Possibly the most influential consideration on filtering is the purpose for whic
 
 -   If you are planning to generate ***high resolution linkage maps***, then highly stringent filtering is warranted, and Diversity Arrays Technology would adjust their pipelines accordingly upon request. Similarly, if you are contemplating an analysis of ***relatedness or inbreeding***, then stringent filtering might be warranted. In any case, it would be wise to start out with high stringency and then progressively relax the stringency and examine the impact on outcomes.
 
--   If your focus is on identifying ***sex linked markers***, which rely heavily on identifying markers that are heterozygous in XY individuals and homozygous in XX individuals, then a filtering threshold for read depth of 10x would be sensible. Sequencing volume in the context of genome size will provide an upper limit to how far you can push the read depth threshold, so in some cases, a high sequence volume service will need to be requested. Because the pipelines of Diversity Arrays Technology depend in part on Mendelian behaviour in the selection of SNP markers, and sex-linked loci do not behave in Mendelian fashion, you might also ask them to relax the stringency of some aspects of their filtering in generating the report.
+-   If your focus is on identifying ***sex-linked markers***, which rely heavily on identifying markers that are heterozygous in XY individuals and homozygous in XX individuals, then a filtering threshold for read depth of 10x would be sensible. Sequencing volume in the context of genome size will provide an upper limit to how far you can push the read depth threshold, so in some cases, a high sequence volume service will need to be requested. Because the pipelines of Diversity Arrays Technology depend in part on Mendelian behaviour in the selection of SNP markers, and sex-linked loci do not behave in Mendelian fashion, you might also ask them to relax the stringency of some aspects of their filtering in generating the report.
 
 -   If your focus is on ***Genome-wide Association Studies (GWAS)*** or identifying ***loci under selection***, then noise in the data will not associate with phenotype, and so filtering can be less stringent in order to maximize the chances of identifying promising associations.
 
@@ -641,7 +641,7 @@ Below is a table modified from @speed2015_relatedness showing kinship values, an
 ::: callout-warning
 Relatedness/kinship are not absolute states but are estimated relative to a reference population for which there is generally little information, so that we can estimate the kinship of a pair of individuals only relative to some other quantity.
 
-Testing relatedness and kinship in your data can be very tricky. Relatedness estimates can be strongly biased by: bad genotyping, DNA contamination, populations structure, inbreeding, etc.
+All relatedness estimates assume the true allele frequencies of your natural populations are known. But **small samples size, missing data, DNA contamination, populations structure, inbreeding, and the presence of related individuals** in your data will bias your frequency distributions.
 
 Previous studies showed that around 5,000 SNPs are sufficient to accurately estimate relatedness and kinship @goudet_kiship.
 :::

@@ -8,6 +8,13 @@ editor_options:
 
 # Welcome! {.unnumbered}
 
+Welcome to the afternoon session of this 1-day workshop developed for the OCS2024 conference. In this session we will run through some population genetic analyses to understand our data from different perspectives, such as: population structure and connectivity, genetic diversity, signals of adaptation, relatedness and sex-linked markers.
+
+The focus of this workshop is to improve our interpretation of the results, not to practice our R coding skill. Therefore, the basic code is available to you and can be improved for your purpose. If you would like some refreshing on R coding and the data formats, have a look at the `Refreshers and tutorials` tab.
+
+**Please ensure R and Rstudio, along with the required packages, are installed on your personal computer BEFORE the workshop. We will not have time to troubleshoot R install issues during the session. You have find a guide to install under the `Install packages` tab.**
+
+Several example dataset have also been made available, but if you have your own data do not hesitate to use that.
 
 ## Here are some things you might see along your journey:
 
@@ -49,3 +56,6 @@ DartR published first by @gruber_dartr, and dartR V2 published by @mijangos_dart
 The code presented here was developed by a group a people for the population genetic workshop in Kioloa. We express our sincere thanks to the following people for making this code available: **Arthur Georges, Bernd Gruber, Luis Mijangos, Renee Catullo, Oliver Berry, Andrzej Killian, Jason Carling, Andrew Kowalczyk, Bill Sherwin, Carlo Pacioni, Robyn Shaw, Catherine Grueber, Kate Farquharson, Luciano Beheregaray, Chris Brauer, Jonathan Sandoval-Castillo, Sally Potter, Craig Moritz, Diana Robledo-Ruiz, Natasha Marosi, Jinliang Wang**.
 
 ![](images/funders_stakeholders.png)
+
+
+More scripts and explanations from this workshop can be found [here](https://green-striped-gecko.github.io/kioloa/)
