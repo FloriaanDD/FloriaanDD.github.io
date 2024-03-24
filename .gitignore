@@ -3,5 +3,7 @@
 .RData
 .Ruserdata
 main_code_cache/
-
+main_code_files/
+install_cache/
+install_files/
 /.quarto/
