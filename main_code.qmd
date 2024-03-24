@@ -455,19 +455,22 @@ Genetic variability of populations of a species is important because it can be t
 
 Ho Hs Ht Dst Htp Dstp Fst Fstp Fis Dest Gst_max Gst_H
 
-For all indexes, the entropies (H) and Hill numbers (D) are calculated. In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g. all loci in HWE & equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below @sherwin. Error bars are +/- 1 standard deviation.
-
-The third term refers to whether the diversity is calculated within populations (alpha) or between populations (beta).
-
-allelic richness (q = 0), Shannon information (q = 1), and heterozygosity (q = 2).
 
 ```{r, warning=FALSE}
 basic.stats <- dartR.base::utils.basic.stats(data.gl)
 basic.stats$overall
 colMeans(basic.stats$Ho, na.rm = TRUE) #observed heterozygosity
 
-hets <- gl.report.heterozygosity(data.gl, method="pop")
+hets <- gl.report.heterozygosity(data.gl, method = "pop")
+```
 
+Some alternate measures for genetic diversity are more comparable between datasets.This is provided by the `gl.report.diversity` function.
+
+The output of this function: provide information for different indices: allelic richness (q = 0), Shannon information (q = 1), and heterozygosity (q = 2); within (alpha) or between (beta) populations. For all indexes, the entropies (H) and Hill numbers (D) are calculated.
+
+In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g. all loci in HWE & equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below @sherwin.
+
+```{r}
 divers <- dartR.base::gl.report.diversity(data.gl, table = FALSE, pbar = FALSE, verbose = 0)
 divers$one_H_alpha
 divers$one_H_beta
@@ -622,21 +625,26 @@ print(length(cand1) + length(cand2))
 Two alleles are identical by descent (IBD) if they are identical copies of the same ancestral allele in a base population. Relatedness is the proportion of alleles shared between individuals that are IBD. Kinship is the probability that two alleles, one taken at random from each individual, are IBD @wang2022_kinship. Kinship considers half the genetic information because it looks at the probability that one individual inherits a particular allele from a common ancestor shared with another individual. Therefore, kinship is equal to half of relatedness.
 
 ::: callout-tip
-Below is a table modified from @speed2015_relatedness showing kinship values, and their confidence intervals (CI) for different relationships.
+Below is a table modified from @speed2015_relatedness showing kinship coefficients ($\theta$), and their confidence intervals (CI), and relatedness values for different relationships.
 
-| Relationship                           | Kinship |    CI(95%)     |
-|:---------------------------------------|:-------:|:--------------:|
-| Identical twins/clones/same individual |   0.5   |       \-       |
-| Sibling/Parent-Offspring               |  0.25   | (0.204, 0.296) |
-| Half-sibling                           |  0.125  | (0.092, 0.158) |
-| First cousin                           |  0.062  | (0.038, 0.089) |
-| Half-cousin                            |  0.031  | (0.012, 0.055) |
-| Second cousin                          |  0.016  | (0.004, 0.031) |
-| Half-second cousin                     |  0.008  | (0.001, 0.020) |
-| Third cousin                           |  0.004  | (0.000, 0.012) |
-| Unrelated                              |    0    |       \-       |
+| Relationship                           | Kinship |    CI(95%)     |    r    |
+|:---------------------------------------|:-------:|:--------------:|:-------:
+| Identical twins/clones/same individual |   0.5   |       \-       |    1    |
+| Sibling/Parent-Offspring               |  0.25   | (0.204, 0.296) |   0.5   |
+| Half-sibling                           |  0.125  | (0.092, 0.158) |  0.25   |
+| First cousin                           |  0.062  | (0.038, 0.089) |  0.125  |
+| Half-cousin                            |  0.031  | (0.012, 0.055) |  0.062  |
+| Second cousin                          |  0.016  | (0.004, 0.031) |  0.031  |
+| Half-second cousin                     |  0.008  | (0.001, 0.020) |  0.016  |
+| Third cousin                           |  0.004  | (0.000, 0.012) |  0.008  |
+| Unrelated                              |    0    |       \-       |    0    |
 :::
 
+Note that the variance of relatedness depends on the number of SNPs and genome size, therefore even with perfect data your relatedness will not follow these expected values exactly.
+![](images/r_distribution.png)
+
+Further, in species with small population sizes (not uncommon in Chondrichthyes), inbreeding may skew the expected values even more.
+![](images/r_FSFS.png)
 
 ::: callout-warning
 Relatedness/kinship are not absolute states but are estimated relative to a reference population for which there is generally little information, so that we can estimate the kinship of a pair of individuals only relative to some other quantity.
@@ -647,9 +655,11 @@ Previous studies showed that around 5,000 SNPs are sufficient to accurately esti
 :::
 
 
+
+
 ## Convert data
 
-There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, etc. For this example, we use the `related` package @pew_related.
+There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, PC-Relate, etc. For this example, we use the `related` package @pew_related.
 
 ```{r}
 relate <- dartR.base::gl2related(data.gl, verbose = 0)

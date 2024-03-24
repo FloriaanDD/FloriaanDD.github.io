@@ -1540,10 +1540,7 @@ Exercise
 <h1>Genetic diversity</h1>
 <p>Genetic variability of populations of a species is important because it can be thought of an indirect measure of the evolvability of those populations. The greater the genetic diversity of a population the bigger the amount of genetic raw material upon which selection can act. A population deprived of its genetic variability is less likely to respond to environmental changes and more vulnerable to the negative effects of inbreeding. From a theoretical point of you measuring (correctly) genetic diversity of a population and comparing it among different naturally occurring or human driven treatments might be important to test the theoretical predictions on impact of drift on effect of population size of relatively isolated (small) populations and on mechanisms of genetic variance (diversity) maintenance. From the conservation point of view the relative genetic diversity of population differentially affected by human intervention might give insight into how resilient populations of a species are to rapid changes of the habitat in which they live.</p>
 <p>Ho Hs Ht Dst Htp Dstp Fst Fstp Fis Dest Gst_max Gst_H</p>
-<p>For all indexes, the entropies (H) and Hill numbers (D) are calculated. In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g.&nbsp;all loci in HWE &amp; equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below <span class="citation" data-cites="sherwin">Sherwin et al. (<a href="references.html#ref-sherwin" role="doc-biblioref">2017</a>)</span>. Error bars are +/- 1 standard deviation.</p>
-<p>The third term refers to whether the diversity is calculated within populations (alpha) or between populations (beta).</p>
-<p>allelic richness (q = 0), Shannon information (q = 1), and heterozygosity (q = 2).</p>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-36_824751c5e854753ba065be1b7c9719e4">
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-36_06e8afadb430f58deae0fd2b714edca1">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>basic.stats <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">utils.basic.stats</span>(data.gl)</span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>basic.stats<span class="sc">$</span>overall</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1559,7 +1556,7 @@ Gst_max   Gst_H
  Van Diemen Gulf 
        0.2391721 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>hets <span class="ot">&lt;-</span> <span class="fu">gl.report.heterozygosity</span>(data.gl, <span class="at">method=</span><span class="st">"pop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>hets <span class="ot">&lt;-</span> <span class="fu">gl.report.heterozygosity</span>(data.gl, <span class="at">method =</span> <span class="st">"pop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting gl.report.heterozygosity 
   Processing genlight object with SNP data
@@ -1595,21 +1592,89 @@ Papua New Guinea       NA 0.233551 0.232530       NA -0.026071 0.373230    NA
 Van Diemen Gulf  0.003961 0.240337 0.186551 0.003966  0.010817 0.106491    NA
 Completed: gl.report.heterozygosity </code></pre>
 </div>
+</div>
+<p>Some alternate measures for genetic diversity are more comparable between datasets.This is provided by the <code>gl.report.diversity</code> function.</p>
+<p>The output of this function: provide information for different indices: allelic richness (q = 0), Shannon information (q = 1), and heterozygosity (q = 2); within (alpha) or between (beta) populations. For all indexes, the entropies (H) and Hill numbers (D) are calculated.</p>
+<p>In a nutshell, the alpha indexes between the different q-values should be similar if there is no deviation from expected allele frequencies and occurrences (e.g.&nbsp;all loci in HWE &amp; equilibrium). If there is a deviation of an index, this links to a process causing it, such as dispersal, selection or strong drift. For a detailed explanation of all the indexes, we recommend resorting to the literature provided below <span class="citation" data-cites="sherwin">Sherwin et al. (<a href="references.html#ref-sherwin" role="doc-biblioref">2017</a>)</span>.</p>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-37_dd9a1686384c70753e32a71ae037c1fb">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>divers <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl.report.diversity</span>(data.gl, <span class="at">table =</span> <span class="cn">FALSE</span>, <span class="at">pbar =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_es[[x[1]]]$dummys[i1 %in% index] +
+one_H_alpha_es[[x[2]]]$dummys[i2 %in% : longer object length is not a multiple
+of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_all[i0 %in% index] - (one_H_alpha_es[[x[1]]]$dummys[i1
+%in% : longer object length is not a multiple of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_es[[x[1]]]$dummys[i1 %in% index] +
+one_H_alpha_es[[x[2]]]$dummys[i2 %in% : longer object length is not a multiple
+of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_all[i0 %in% index] - (one_H_alpha_es[[x[1]]]$dummys[i1
+%in% : longer object length is not a multiple of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_es[[x[1]]]$dummys[i1 %in% index] +
+one_H_alpha_es[[x[2]]]$dummys[i2 %in% : longer object length is not a multiple
+of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_all[i0 %in% index] - (one_H_alpha_es[[x[1]]]$dummys[i1
+%in% : longer object length is not a multiple of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_es[[x[1]]]$dummys[i1 %in% index] +
+one_H_alpha_es[[x[2]]]$dummys[i2 %in% : longer object length is not a multiple
+of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_all[i0 %in% index] - (one_H_alpha_es[[x[1]]]$dummys[i1
+%in% : longer object length is not a multiple of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_es[[x[1]]]$dummys[i1 %in% index] +
+one_H_alpha_es[[x[2]]]$dummys[i2 %in% : longer object length is not a multiple
+of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_all[i0 %in% index] - (one_H_alpha_es[[x[1]]]$dummys[i1
+%in% : longer object length is not a multiple of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_es[[x[1]]]$dummys[i1 %in% index] +
+one_H_alpha_es[[x[2]]]$dummys[i2 %in% : longer object length is not a multiple
+of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_all[i0 %in% index] - (one_H_alpha_es[[x[1]]]$dummys[i1
+%in% : longer object length is not a multiple of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_es[[x[1]]]$dummys[i1 %in% index] +
+one_H_alpha_es[[x[2]]]$dummys[i2 %in% : longer object length is not a multiple
+of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in one_H_alpha_all[i0 %in% index] - (one_H_alpha_es[[x[1]]]$dummys[i1
+%in% : longer object length is not a multiple of shorter object length</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Processing genlight object with SNP data</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-36-2.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>divers<span class="sc">$</span>one_H_alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>divers<span class="sc">$</span>one_H_alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Cambridge Gulf       Daly River       King Sound Papua New Guinea 
        0.3529367        0.3482662        0.2051896        0.3026173 
  Van Diemen Gulf 
        0.3687394 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>divers<span class="sc">$</span>one_H_beta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>divers<span class="sc">$</span>one_H_beta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 Cambridge Gulf Daly River King Sound Papua New Guinea
 Cambridge Gulf               NA 0.14604195 0.20724507       0.20825765
@@ -1649,20 +1714,20 @@ Exercise
 <p><code>divMigrate</code>&nbsp;uses the method described in <span class="citation" data-cites="sundqvist_divmigrate">Sundqvist et al. (<a href="references.html#ref-sundqvist_divmigrate" role="doc-biblioref">2016</a>)</span> to plot the relative migration levels between population samples.</p>
 <p>Nm (i.e., the effective number of migrants). This statistic incorporates complementary information from both Gst and D, suggesting it may be a more generally suitable measure of migration. When using Nm for calculating the percent of correct directions in the different simulation scenarios.</p>
 <p>Alternatively, the number of private alleles provides an indication of genetic isolation. We use private alleles (i.e.&nbsp;alleles only present in one population) as a sign of no migration.</p>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-37_3f2790f2697f8c424925383630e62cea">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"gl2gpop_FDD.R"</span>)</span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl2gpop</span>(data.gl, <span class="at">filename =</span> <span class="st">"data/genepop.gen"</span>)</span>
-<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dartR.base::gl2genepop(data.gl, outfile = "genepop.gen", outpath = getwd(), verbose = 5) # Not recognised by diveRsity</span></span>
-<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>migration <span class="ot">&lt;-</span> diveRsity<span class="sc">::</span><span class="fu">divMigrate</span>(<span class="at">infile =</span> <span class="st">"data/genepop.gen"</span>, <span class="at">boots =</span> <span class="dv">100</span>, <span class="at">stat =</span> <span class="st">"Nm"</span>, <span class="at">plot_network =</span> <span class="cn">TRUE</span>, <span class="at">para =</span> <span class="cn">TRUE</span>, <span class="at">filter_threshold =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-38_998fb00c7b17b0f54167899188339447">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"gl2gpop_FDD.R"</span>)</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl2gpop</span>(data.gl, <span class="at">filename =</span> <span class="st">"data/genepop.gen"</span>)</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dartR.base::gl2genepop(data.gl, outfile = "genepop.gen", outpath = getwd(), verbose = 5) # Not recognised by diveRsity</span></span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>migration <span class="ot">&lt;-</span> diveRsity<span class="sc">::</span><span class="fu">divMigrate</span>(<span class="at">infile =</span> <span class="st">"data/genepop.gen"</span>, <span class="at">boots =</span> <span class="dv">100</span>, <span class="at">stat =</span> <span class="st">"Nm"</span>, <span class="at">plot_network =</span> <span class="cn">TRUE</span>, <span class="at">para =</span> <span class="cn">TRUE</span>, <span class="at">filter_threshold =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(migration<span class="sc">$</span>nmRelMig) <span class="ot">&lt;-</span> adegenet<span class="sc">::</span><span class="fu">popNames</span>(data.gl)</span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(migration<span class="sc">$</span>nmRelMig) <span class="ot">&lt;-</span> adegenet<span class="sc">::</span><span class="fu">popNames</span>(data.gl)</span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>migration<span class="sc">$</span>nmRelMig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(migration<span class="sc">$</span>nmRelMig) <span class="ot">&lt;-</span> adegenet<span class="sc">::</span><span class="fu">popNames</span>(data.gl)</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(migration<span class="sc">$</span>nmRelMig) <span class="ot">&lt;-</span> adegenet<span class="sc">::</span><span class="fu">popNames</span>(data.gl)</span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>migration<span class="sc">$</span>nmRelMig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 Cambridge Gulf Daly River King Sound Papua New Guinea
 Cambridge Gulf               NA  0.7857795 0.10183280        0.2322329
@@ -1677,8 +1742,8 @@ King Sound             0.3130946
 Papua New Guinea       0.3640824
 Van Diemen Gulf               NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Private alleles</span></span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>dartR.base<span class="sc">::</span><span class="fu">gl.report.pa</span>(data.gl, <span class="at">plot.display =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Private alleles</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>dartR.base<span class="sc">::</span><span class="fu">gl.report.pa</span>(data.gl, <span class="at">plot.display =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Processing genlight object with SNP data</code></pre>
 </div>
@@ -1749,13 +1814,13 @@ Important
 <p>OutFLANK estimates the distribution of <span class="math inline">\(FST\)</span> based on a trimmed sample of <span class="math inline">\(FST\)</span>’s. It assumes that the majority of loci in the center of the distribution are neutral and infers the shape of the distribution of neutral <span class="math inline">\(FST\)</span> using a trimmed set of loci. Loci with the highest and lowest <span class="math inline">\(FST\)</span>’s are trimmed from the data set before this inference, and the distribution of <span class="math inline">\(FST df/(mean FST)\)</span> is assumed to follow a chi-square distribution. Based on this inferred distribution, each locus is given a q-value based on its quantile in the inferred null distribution.</p>
 <p>More information here:</p>
 <p><a href="https://popgen.nescent.org/2016-01-26-SNP-selection.html">Detection of the signal of selection from genome scan</a></p>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-38_fcb5fb15df849bf1d821de31f97c850a">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>outliers <span class="ot">&lt;-</span> dartR.popgen<span class="sc">::</span><span class="fu">gl.outflank</span>(data.gl,</span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plot =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">LeftTrimFraction =</span> <span class="fl">0.05</span>,</span>
-<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">RightTrimFraction =</span> <span class="fl">0.05</span>,</span>
-<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Hmin =</span> <span class="fl">0.1</span>,</span>
-<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">qthreshold =</span> <span class="fl">0.05</span>,)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-39_5d4852385d96bbb8465aa5144ea6d92f">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>outliers <span class="ot">&lt;-</span> dartR.popgen<span class="sc">::</span><span class="fu">gl.outflank</span>(data.gl,</span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plot =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">LeftTrimFraction =</span> <span class="fl">0.05</span>,</span>
+<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">RightTrimFraction =</span> <span class="fl">0.05</span>,</span>
+<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Hmin =</span> <span class="fl">0.1</span>,</span>
+<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">qthreshold =</span> <span class="fl">0.05</span>,)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting gl2gi 
   Processing genlight object with SNP data
@@ -1764,13 +1829,13 @@ Completed: gl2gi
 Calculating FSTs, may take a few minutes...</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>outliers<span class="sc">$</span>outflank<span class="sc">$</span>numberLowFstOutliers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>outliers<span class="sc">$</span>outflank<span class="sc">$</span>numberLowFstOutliers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>outliers<span class="sc">$</span>outflank<span class="sc">$</span>numberHighFstOutliers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>outliers<span class="sc">$</span>outflank<span class="sc">$</span>numberHighFstOutliers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -1781,8 +1846,8 @@ Calculating FSTs, may take a few minutes...</code></pre>
 <p><strong>Better at detecting weak selective pressures</strong></p>
 <p>Here, we illustrate the use of <strong><em>Redundancy Analysis (RDA)</em></strong> as a genotype-environment association (GEA) method to detect loci under selection (Forester et al., 2018). RDA is a multivariate ordination technique that can be used to analyze many loci and environmental predictors simultaneously. RDA determines how groups of loci co-vary in response to the multivariate environment, and can detect processes that result in weak, multilocus molecular signatures (Forester et al., 2018).</p>
 <p>More information here: <a href="https://popgen.nescent.org/2018-03-27_RDA_GEA.html">Detecting multilocus adaptation using Redundancy Analysis (RDA)</a></p>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-39_160f1a93214deccf28fc10c47067a622">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>data.gl.imputed <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl.impute</span>(data.gl, <span class="at">parallel =</span> <span class="cn">FALSE</span>) <span class="co"># no missing data allowed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-40_aa9d77e4d50307bd00fd5dd4bcd2692e">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>data.gl.imputed <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl.impute</span>(data.gl, <span class="at">parallel =</span> <span class="cn">FALSE</span>) <span class="co"># no missing data allowed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting :: 
  Starting dartR.base 
@@ -1794,23 +1859,23 @@ Completed: ::
  Completed: dartR.base 
  Completed: gl.impute </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>gen <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data.gl.imputed)</span>
-<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>predictor <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data.gl.imputed<span class="sc">@</span>other<span class="sc">$</span>ind.metrics)</span>
-<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(predictor[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">scale =</span> T, <span class="at">cex.cor =</span> <span class="dv">3</span>) <span class="co">#to check correlation between pairs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>gen <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data.gl.imputed)</span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>predictor <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data.gl.imputed<span class="sc">@</span>other<span class="sc">$</span>ind.metrics)</span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(predictor[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">scale =</span> T, <span class="at">cex.cor =</span> <span class="dv">3</span>) <span class="co">#to check correlation between pairs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For simplicity, we take the population as a proxy for environment (and sex a s a covariate), but ideally you have fine-scale environmental data for each individual. </span></span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>SNP_rda <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">rda</span>(gen <span class="sc">~</span> pop <span class="sc">+</span> <span class="fu">Condition</span>(sex), </span>
-<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> predictor, <span class="at">scale =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SNP_rda)<span class="sc">$</span>cont<span class="sc">$</span>importance[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For simplicity, we take the population as a proxy for environment (and sex a s a covariate), but ideally you have fine-scale environmental data for each individual. </span></span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>SNP_rda <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">rda</span>(gen <span class="sc">~</span> pop <span class="sc">+</span> <span class="fu">Condition</span>(sex), </span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> predictor, <span class="at">scale =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SNP_rda)<span class="sc">$</span>cont<span class="sc">$</span>importance[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                             RDA1        RDA2        RDA3         RDA4
 Eigenvalue            94.49748776 59.59813062 25.31846964 12.886197785
 Proportion Explained   0.04317671  0.02723089  0.01156822  0.005887813
 Cumulative Proportion  0.04317671  0.07040760  0.08197582  0.087863636</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(vegan<span class="sc">::</span><span class="fu">eigenvals</span>(SNP_rda, <span class="at">model =</span> <span class="st">"constrained"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(vegan<span class="sc">::</span><span class="fu">eigenvals</span>(SNP_rda, <span class="at">model =</span> <span class="st">"constrained"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                          RDA1    RDA2    RDA3     RDA4
@@ -1818,13 +1883,13 @@ Eigenvalue            94.4975 59.5981 25.3185 12.88620
 Proportion Explained   0.4914  0.3099  0.1317  0.06701
 Cumulative Proportion  0.4914  0.8013  0.9330  1.00000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We have as many constrained ("RDA") axes as we have predictors </span></span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual variance is then modelled by PCA (the unconstrained "PC" axes)</span></span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance explained by the environmental predictors is under "Proportion"</span></span>
-<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and "Constrained" = equivalent to R2 in multiple regression,</span></span>
-<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="co"># so it is biased &amp; should be adjusted based on the # of predictors:</span></span>
-<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a>vegan<span class="sc">::</span><span class="fu">RsquareAdj</span>(SNP_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We have as many constrained ("RDA") axes as we have predictors </span></span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual variance is then modelled by PCA (the unconstrained "PC" axes)</span></span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance explained by the environmental predictors is under "Proportion"</span></span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and "Constrained" = equivalent to R2 in multiple regression,</span></span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a><span class="co"># so it is biased &amp; should be adjusted based on the # of predictors:</span></span>
+<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a>vegan<span class="sc">::</span><span class="fu">RsquareAdj</span>(SNP_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$r.squared
 [1] 0.08693503
@@ -1832,11 +1897,11 @@ Cumulative Proportion  0.4914  0.8013  0.9330  1.00000</code></pre>
 $adj.r.squared
 [1] 0.07931155</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Our constrained ordination explains about 6% of the variation</span></span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Not surprising given our large # of SNPs and other processes at work </span></span>
-<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>SNP.aov <span class="ot">&lt;-</span> <span class="fu">anova</span>(SNP_rda, <span class="at">test =</span> <span class="st">"Chi"</span>, <span class="at">permutations =</span> <span class="dv">100</span>, <span class="at">parallel =</span> <span class="dv">4</span>) <span class="co">#run Anova on the result to see the significance level</span></span>
-<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(SNP.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Our constrained ordination explains about 6% of the variation</span></span>
+<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Not surprising given our large # of SNPs and other processes at work </span></span>
+<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a>SNP.aov <span class="ot">&lt;-</span> <span class="fu">anova</span>(SNP_rda, <span class="at">test =</span> <span class="st">"Chi"</span>, <span class="at">permutations =</span> <span class="dv">100</span>, <span class="at">parallel =</span> <span class="dv">4</span>) <span class="co">#run Anova on the result to see the significance level</span></span>
+<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(SNP.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Permutation test for rda under reduced model
 Permutation: free
@@ -1849,51 +1914,51 @@ Residual 453   1996.3
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally let's check Variance Inflation Factors for our predictors (they should be ok)</span></span>
-<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>vegan<span class="sc">::</span><span class="fu">vif.cca</span>(SNP_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally let's check Variance Inflation Factors for our predictors (they should be ok)</span></span>
+<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>vegan<span class="sc">::</span><span class="fu">vif.cca</span>(SNP_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               sexM                sexU       popDaly River       popKing Sound 
            1.044034            2.272482            1.816568            1.612040 
 popPapua New Guinea  popVan Diemen Gulf 
            2.400668            2.415785 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All are below 10 and most are below 5 = multicollinearity shouldn't be a problem</span></span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(SNP_rda, <span class="at">npcs =</span> <span class="dv">20</span>, <span class="at">ptype =</span> <span class="st">"lines"</span>, <span class="at">bstick =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All are below 10 and most are below 5 = multicollinearity shouldn't be a problem</span></span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(SNP_rda, <span class="at">npcs =</span> <span class="dv">20</span>, <span class="at">ptype =</span> <span class="st">"lines"</span>, <span class="at">bstick =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-40-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> predictor<span class="sc">$</span>pop</span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#ff7f00"</span>,<span class="st">"#1f78b4"</span>,<span class="st">"#ffff33"</span>,<span class="st">"#a6cee3"</span>,<span class="st">"#33a02c"</span>,<span class="st">"#e31a1c"</span>)</span>
-<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SNP_rda, <span class="at">choices =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">scaling =</span> <span class="dv">3</span>)</span>
-<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(SNP_rda, <span class="at">display =</span> <span class="st">"species"</span>, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="fl">0.7</span>, <span class="at">col =</span> <span class="st">"gray32"</span>, <span class="at">scaling =</span> <span class="dv">3</span>)           <span class="co"># the SNPs</span></span>
-<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(SNP_rda, <span class="at">display =</span> <span class="st">"sites"</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> <span class="fl">1.3</span>, <span class="at">col =</span> <span class="st">"gray32"</span>, <span class="at">scaling =</span> <span class="dv">3</span>, <span class="at">bg =</span> col[pop]) <span class="co"># the individuals</span></span>
-<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(SNP_rda, <span class="at">scaling =</span> <span class="dv">3</span>, <span class="at">display =</span> <span class="st">"bp"</span>, <span class="at">col =</span> <span class="st">"#0868ac"</span>, <span class="at">cex =</span> <span class="dv">1</span>)                           <span class="co"># the predictors</span></span>
-<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, <span class="at">legend =</span> <span class="fu">levels</span>(pop), <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">col =</span> <span class="st">"gray32"</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> <span class="dv">1</span>, <span class="at">pt.bg =</span> col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> predictor<span class="sc">$</span>pop</span>
+<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#ff7f00"</span>,<span class="st">"#1f78b4"</span>,<span class="st">"#ffff33"</span>,<span class="st">"#a6cee3"</span>,<span class="st">"#33a02c"</span>,<span class="st">"#e31a1c"</span>)</span>
+<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SNP_rda, <span class="at">choices =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">scaling =</span> <span class="dv">3</span>)</span>
+<span id="cb146-4"><a href="#cb146-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(SNP_rda, <span class="at">display =</span> <span class="st">"species"</span>, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="fl">0.7</span>, <span class="at">col =</span> <span class="st">"gray32"</span>, <span class="at">scaling =</span> <span class="dv">3</span>)           <span class="co"># the SNPs</span></span>
+<span id="cb146-5"><a href="#cb146-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(SNP_rda, <span class="at">display =</span> <span class="st">"sites"</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> <span class="fl">1.3</span>, <span class="at">col =</span> <span class="st">"gray32"</span>, <span class="at">scaling =</span> <span class="dv">3</span>, <span class="at">bg =</span> col[pop]) <span class="co"># the individuals</span></span>
+<span id="cb146-6"><a href="#cb146-6" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(SNP_rda, <span class="at">scaling =</span> <span class="dv">3</span>, <span class="at">display =</span> <span class="st">"bp"</span>, <span class="at">col =</span> <span class="st">"#0868ac"</span>, <span class="at">cex =</span> <span class="dv">1</span>)                           <span class="co"># the predictors</span></span>
+<span id="cb146-7"><a href="#cb146-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, <span class="at">legend =</span> <span class="fu">levels</span>(pop), <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">col =</span> <span class="st">"gray32"</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> <span class="dv">1</span>, <span class="at">pt.bg =</span> col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-40-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify candidates</span></span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -------------------</span></span>
-<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>load.rda <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">scores</span>(SNP_rda, <span class="at">choices =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">display =</span> <span class="st">"species"</span>)  <span class="co"># Species scores for the first three constrained axes</span></span>
-<span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(load.rda[,<span class="dv">1</span>], <span class="at">main =</span> <span class="st">"Loadings on RDA1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify candidates</span></span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -------------------</span></span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a>load.rda <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">scores</span>(SNP_rda, <span class="at">choices =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">display =</span> <span class="st">"species"</span>)  <span class="co"># Species scores for the first three constrained axes</span></span>
+<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(load.rda[,<span class="dv">1</span>], <span class="at">main =</span> <span class="st">"Loadings on RDA1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-39-4.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-40-4.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(load.rda[,<span class="dv">2</span>], <span class="at">main =</span> <span class="st">"Loadings on RDA2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(load.rda[,<span class="dv">2</span>], <span class="at">main =</span> <span class="st">"Loadings on RDA2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-39-5.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-40-5.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This simple function identifies the SNPs that load in the tails of these distributions. </span></span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Outliers are defines as 3 standard deviation cut-off (two-tailed p-value = 0.0027).</span></span>
-<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>outliers <span class="ot">&lt;-</span> <span class="cf">function</span>(x,z){</span>
-<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>  lims <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> z <span class="sc">*</span> <span class="fu">sd</span>(x)     <span class="co"># find loadings +/-z sd from mean loading</span></span>
-<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>  x[x <span class="sc">&lt;</span> lims[<span class="dv">1</span>] <span class="sc">|</span> x <span class="sc">&gt;</span> lims[<span class="dv">2</span>]]               <span class="co"># locus names in these tails</span></span>
-<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a>cand1 <span class="ot">&lt;-</span> <span class="fu">outliers</span>(load.rda[,<span class="dv">1</span>],<span class="dv">3</span>)</span>
-<span id="cb135-9"><a href="#cb135-9" aria-hidden="true" tabindex="-1"></a>cand2 <span class="ot">&lt;-</span> <span class="fu">outliers</span>(load.rda[,<span class="dv">2</span>],<span class="dv">3</span>)</span>
-<span id="cb135-10"><a href="#cb135-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(cand1) <span class="sc">+</span> <span class="fu">length</span>(cand2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This simple function identifies the SNPs that load in the tails of these distributions. </span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Outliers are defines as 3 standard deviation cut-off (two-tailed p-value = 0.0027).</span></span>
+<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>outliers <span class="ot">&lt;-</span> <span class="cf">function</span>(x,z){</span>
+<span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a>  lims <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> z <span class="sc">*</span> <span class="fu">sd</span>(x)     <span class="co"># find loadings +/-z sd from mean loading</span></span>
+<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a>  x[x <span class="sc">&lt;</span> lims[<span class="dv">1</span>] <span class="sc">|</span> x <span class="sc">&gt;</span> lims[<span class="dv">2</span>]]               <span class="co"># locus names in these tails</span></span>
+<span id="cb149-6"><a href="#cb149-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb149-7"><a href="#cb149-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb149-8"><a href="#cb149-8" aria-hidden="true" tabindex="-1"></a>cand1 <span class="ot">&lt;-</span> <span class="fu">outliers</span>(load.rda[,<span class="dv">1</span>],<span class="dv">3</span>)</span>
+<span id="cb149-9"><a href="#cb149-9" aria-hidden="true" tabindex="-1"></a>cand2 <span class="ot">&lt;-</span> <span class="fu">outliers</span>(load.rda[,<span class="dv">2</span>],<span class="dv">3</span>)</span>
+<span id="cb149-10"><a href="#cb149-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(cand1) <span class="sc">+</span> <span class="fu">length</span>(cand2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30</code></pre>
 </div>
@@ -1913,13 +1978,20 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Below is a table modified from <span class="citation" data-cites="speed2015_relatedness">Speed and Balding (<a href="references.html#ref-speed2015_relatedness" role="doc-biblioref">2015</a>)</span> showing kinship values, and their confidence intervals (CI) for different relationships.</p>
+<p>Below is a table modified from <span class="citation" data-cites="speed2015_relatedness">Speed and Balding (<a href="references.html#ref-speed2015_relatedness" role="doc-biblioref">2015</a>)</span> showing kinship coefficients (<span class="math inline">\(\theta\)</span>), and their confidence intervals (CI), and relatedness values for different relationships.</p>
 <table class="table">
+<colgroup>
+<col style="width: 54%">
+<col style="width: 12%">
+<col style="width: 21%">
+<col style="width: 12%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Relationship</th>
 <th style="text-align: center;">Kinship</th>
 <th style="text-align: center;">CI(95%)</th>
+<th style="text-align: center;">r</th>
 </tr>
 </thead>
 <tbody>
@@ -1927,51 +1999,62 @@ Tip
 <td style="text-align: left;">Identical twins/clones/same individual</td>
 <td style="text-align: center;">0.5</td>
 <td style="text-align: center;">-</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sibling/Parent-Offspring</td>
 <td style="text-align: center;">0.25</td>
 <td style="text-align: center;">(0.204, 0.296)</td>
+<td style="text-align: center;">0.5</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Half-sibling</td>
 <td style="text-align: center;">0.125</td>
 <td style="text-align: center;">(0.092, 0.158)</td>
+<td style="text-align: center;">0.25</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">First cousin</td>
 <td style="text-align: center;">0.062</td>
 <td style="text-align: center;">(0.038, 0.089)</td>
+<td style="text-align: center;">0.125</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Half-cousin</td>
 <td style="text-align: center;">0.031</td>
 <td style="text-align: center;">(0.012, 0.055)</td>
+<td style="text-align: center;">0.062</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Second cousin</td>
 <td style="text-align: center;">0.016</td>
 <td style="text-align: center;">(0.004, 0.031)</td>
+<td style="text-align: center;">0.031</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Half-second cousin</td>
 <td style="text-align: center;">0.008</td>
 <td style="text-align: center;">(0.001, 0.020)</td>
+<td style="text-align: center;">0.016</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Third cousin</td>
 <td style="text-align: center;">0.004</td>
 <td style="text-align: center;">(0.000, 0.012)</td>
+<td style="text-align: center;">0.008</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Unrelated</td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">-</td>
+<td style="text-align: center;">0</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+<p>Note that the variance of relatedness depends on the number of SNPs and genome size, therefore even with perfect data your relatedness will not follow these expected values exactly. <img src="images/r_distribution.png" class="img-fluid"></p>
+<p>Further, in species with small population sizes (not uncommon in Chondrichthyes), inbreeding may skew the expected values even more. <img src="images/r_FSFS.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1989,34 +2072,34 @@ Warning
 </div>
 <section id="convert-data" class="level2">
 <h2 class="anchored" data-anchor-id="convert-data">Convert data</h2>
-<p>There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, etc. For this example, we use the <code>related</code> package <span class="citation" data-cites="pew_related">Pew et al. (<a href="references.html#ref-pew_related" role="doc-biblioref">2015</a>)</span>.</p>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-40_b0137606f98139482d196cfcb4d5ebba">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>relate <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl2related</span>(data.gl, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>pop.code <span class="ot">&lt;-</span> <span class="fu">substr</span>(data.gl<span class="sc">$</span>pop, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">2</span>) <span class="co">#Related only takes 2 letter code for population</span></span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>relate<span class="sc">$</span>V1 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pop.code, <span class="st">"_"</span>, relate<span class="sc">$</span>V1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are many good software available to estimate relatedness, such as COLONY2, sequoia, gcta64, EMIBD9, PC-Relate, etc. For this example, we use the <code>related</code> package <span class="citation" data-cites="pew_related">Pew et al. (<a href="references.html#ref-pew_related" role="doc-biblioref">2015</a>)</span>.</p>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-41_973d640b0698d3a811475c21d97e9faf">
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>relate <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl2related</span>(data.gl, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>pop.code <span class="ot">&lt;-</span> <span class="fu">substr</span>(data.gl<span class="sc">$</span>pop, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">2</span>) <span class="co">#Related only takes 2 letter code for population</span></span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>relate<span class="sc">$</span>V1 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pop.code, <span class="st">"_"</span>, relate<span class="sc">$</span>V1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="run-coancestry-on-full-data" class="level2">
 <h2 class="anchored" data-anchor-id="run-coancestry-on-full-data">Run coancestry on full data</h2>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-41_06ccad5c425e81122c8d6d789bb077df">
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>pw.rel <span class="ot">&lt;-</span> related<span class="sc">::</span><span class="fu">coancestry</span>(relate, <span class="at">lynchli =</span> <span class="dv">1</span>, <span class="at">lynchrd =</span> <span class="dv">1</span>,<span class="at">trioml =</span> 0L, <span class="at">dyadml =</span> 0L,</span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">quellergt =</span> <span class="dv">1</span>, <span class="at">wang =</span> <span class="dv">1</span>, <span class="at">ritland =</span> <span class="dv">1</span>)</span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(pw.rel, <span class="at">file =</span> <span class="st">"data/relatedness.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-42_68d4a4aec168c6250e3deba3440a08bb">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>pw.rel <span class="ot">&lt;-</span> related<span class="sc">::</span><span class="fu">coancestry</span>(relate, <span class="at">lynchli =</span> <span class="dv">1</span>, <span class="at">lynchrd =</span> <span class="dv">1</span>,<span class="at">trioml =</span> 0L, <span class="at">dyadml =</span> 0L,</span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">quellergt =</span> <span class="dv">1</span>, <span class="at">wang =</span> <span class="dv">1</span>, <span class="at">ritland =</span> <span class="dv">1</span>)</span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(pw.rel, <span class="at">file =</span> <span class="st">"data/relatedness.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-42_09c1bbd8f30e82503ef20c96a3e0c35e">
-<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/relatedness.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-43_1875ace105dbb6359830b834f1d8fd6c">
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/relatedness.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "pw.rel"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> pw.rel<span class="sc">$</span>relatedness</span>
-<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a>plot.data <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(res, condition, measurement, <span class="dv">5</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">factor_key =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a>summ <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(res, group) <span class="sc">%&gt;%</span></span>
-<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="fu">mean</span>(ritland))</span>
-<span id="cb141-6"><a href="#cb141-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-7"><a href="#cb141-7" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(summ) <span class="sc">%&gt;%</span></span>
-<span id="cb141-8"><a href="#cb141-8" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">font_size =</span> <span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> pw.rel<span class="sc">$</span>relatedness</span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a>plot.data <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(res, condition, measurement, <span class="dv">5</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">factor_key =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a>summ <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(res, group) <span class="sc">%&gt;%</span></span>
+<span id="cb155-5"><a href="#cb155-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="fu">mean</span>(ritland))</span>
+<span id="cb155-6"><a href="#cb155-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-7"><a href="#cb155-7" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(summ) <span class="sc">%&gt;%</span></span>
+<span id="cb155-8"><a href="#cb155-8" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">font_size =</span> <span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -2131,27 +2214,27 @@ Warning
 
 
 </div>
-<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(plot.data[plot.data<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,], </span>
-<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>                        ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> measurement, </span>
-<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
-<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb142-5"><a href="#cb142-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(condition<span class="sc">~</span>.) <span class="sc">+</span></span>
-<span id="cb142-6"><a href="#cb142-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Site"</span>, <span class="at">y =</span> <span class="st">"Relatedness"</span>) <span class="sc">+</span></span>
-<span id="cb142-7"><a href="#cb142-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb142-8"><a href="#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(plot.data[plot.data<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,], </span>
+<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a>                        ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> measurement, </span>
+<span id="cb156-3"><a href="#cb156-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb156-4"><a href="#cb156-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb156-5"><a href="#cb156-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(condition<span class="sc">~</span>.) <span class="sc">+</span></span>
+<span id="cb156-6"><a href="#cb156-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Site"</span>, <span class="at">y =</span> <span class="st">"Relatedness"</span>) <span class="sc">+</span></span>
+<span id="cb156-7"><a href="#cb156-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb156-8"><a href="#cb156-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>hist.plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(plot.data[plot.data<span class="sc">$</span>measurement <span class="sc">&gt;</span> <span class="fl">0.1</span> <span class="sc">&amp;</span> </span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"VaVa"</span> <span class="sc">&amp;</span> </span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,],</span>
-<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>                        ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> measurement)) <span class="sc">+</span></span>
-<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">bins =</span>  <span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb143-6"><a href="#cb143-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wang - relatedness"</span>,</span>
-<span id="cb143-7"><a href="#cb143-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Frequency"</span>)</span>
-<span id="cb143-8"><a href="#cb143-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hist.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a>hist.plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(plot.data[plot.data<span class="sc">$</span>measurement <span class="sc">&gt;</span> <span class="fl">0.1</span> <span class="sc">&amp;</span> </span>
+<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"VaVa"</span> <span class="sc">&amp;</span> </span>
+<span id="cb157-3"><a href="#cb157-3" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,],</span>
+<span id="cb157-4"><a href="#cb157-4" aria-hidden="true" tabindex="-1"></a>                        ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> measurement)) <span class="sc">+</span></span>
+<span id="cb157-5"><a href="#cb157-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">bins =</span>  <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb157-6"><a href="#cb157-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wang - relatedness"</span>,</span>
+<span id="cb157-7"><a href="#cb157-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Frequency"</span>)</span>
+<span id="cb157-8"><a href="#cb157-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hist.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-43-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -2172,52 +2255,52 @@ Exercise
 <section id="one-population" class="level2">
 <h2 class="anchored" data-anchor-id="one-population">One population</h2>
 <p>In reality, relatedness should only be estimated with a single population.</p>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-43_f01fa349d5c9903571abfb927cf776a8">
-<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>popname <span class="ot">&lt;-</span> <span class="st">"Van Diemen Gulf"</span></span>
-<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>relate<span class="fl">.1</span>pop <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl2related</span>(data.gl[data.gl<span class="sc">$</span>pop <span class="sc">==</span> popname,], <span class="at">verbose =</span> <span class="dv">0</span>)</span>
-<span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a>pop.code <span class="ot">&lt;-</span> <span class="st">"Va"</span> <span class="co">#Related only takes 2 letter code for population</span></span>
-<span id="cb144-5"><a href="#cb144-5" aria-hidden="true" tabindex="-1"></a>relate<span class="fl">.1</span>pop<span class="sc">$</span>V1 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pop.code, <span class="st">"_"</span>, relate<span class="fl">.1</span>pop<span class="sc">$</span>V1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-44_f461925ec2ed48f21486eb278a66e68f">
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>popname <span class="ot">&lt;-</span> <span class="st">"Van Diemen Gulf"</span></span>
+<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a>relate<span class="fl">.1</span>pop <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl2related</span>(data.gl[data.gl<span class="sc">$</span>pop <span class="sc">==</span> popname,], <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a>pop.code <span class="ot">&lt;-</span> <span class="st">"Va"</span> <span class="co">#Related only takes 2 letter code for population</span></span>
+<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a>relate<span class="fl">.1</span>pop<span class="sc">$</span>V1 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pop.code, <span class="st">"_"</span>, relate<span class="fl">.1</span>pop<span class="sc">$</span>V1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-44_c872197bf54e2359687ea77c88d7a01b">
-<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>pw.rel<span class="fl">.1</span>pop <span class="ot">&lt;-</span> related<span class="sc">::</span><span class="fu">coancestry</span>(relate<span class="fl">.1</span>pop, <span class="at">lynchli =</span> <span class="dv">1</span>, <span class="at">lynchrd =</span> <span class="dv">1</span>,<span class="at">trioml =</span> 0L, <span class="at">dyadml =</span> 0L,</span>
-<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">quellergt =</span> <span class="dv">1</span>, <span class="at">wang =</span> <span class="dv">1</span>, <span class="at">ritland =</span> <span class="dv">1</span>)</span>
-<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-4"><a href="#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(pw.rel<span class="fl">.1</span>pop, <span class="at">file =</span> <span class="st">"data/relatedness_1pop.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-45_237ba9fe83fccca17addf19587ea6d12">
+<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>pw.rel<span class="fl">.1</span>pop <span class="ot">&lt;-</span> related<span class="sc">::</span><span class="fu">coancestry</span>(relate<span class="fl">.1</span>pop, <span class="at">lynchli =</span> <span class="dv">1</span>, <span class="at">lynchrd =</span> <span class="dv">1</span>,<span class="at">trioml =</span> 0L, <span class="at">dyadml =</span> 0L,</span>
+<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">quellergt =</span> <span class="dv">1</span>, <span class="at">wang =</span> <span class="dv">1</span>, <span class="at">ritland =</span> <span class="dv">1</span>)</span>
+<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-4"><a href="#cb159-4" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(pw.rel<span class="fl">.1</span>pop, <span class="at">file =</span> <span class="st">"data/relatedness_1pop.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-45_4db7231a18b2c97b88f8560bd0cd400e">
-<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/relatedness_1pop.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-46_800686291c871ea84b8936439f6b5e3c">
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/relatedness_1pop.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "pw.rel.1pop"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>res<span class="fl">.1</span>pop <span class="ot">&lt;-</span> pw.rel<span class="fl">.1</span>pop<span class="sc">$</span>relatedness</span>
-<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a>plot.data<span class="fl">.1</span>pop <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(res<span class="fl">.1</span>pop, condition, measurement, <span class="dv">5</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">factor_key =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a>hist.plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(plot.data<span class="fl">.1</span>pop[plot.data<span class="fl">.1</span>pop<span class="sc">$</span>measurement <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
-<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="fl">.1</span>pop<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,],</span>
-<span id="cb148-6"><a href="#cb148-6" aria-hidden="true" tabindex="-1"></a>                        ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> measurement)) <span class="sc">+</span></span>
-<span id="cb148-7"><a href="#cb148-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">bins =</span>  <span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb148-8"><a href="#cb148-8" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wang - relatedness"</span>,</span>
-<span id="cb148-9"><a href="#cb148-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Frequency"</span>)</span>
-<span id="cb148-10"><a href="#cb148-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hist.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>res<span class="fl">.1</span>pop <span class="ot">&lt;-</span> pw.rel<span class="fl">.1</span>pop<span class="sc">$</span>relatedness</span>
+<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>plot.data<span class="fl">.1</span>pop <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(res<span class="fl">.1</span>pop, condition, measurement, <span class="dv">5</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">factor_key =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb162-3"><a href="#cb162-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-4"><a href="#cb162-4" aria-hidden="true" tabindex="-1"></a>hist.plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(plot.data<span class="fl">.1</span>pop[plot.data<span class="fl">.1</span>pop<span class="sc">$</span>measurement <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
+<span id="cb162-5"><a href="#cb162-5" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="fl">.1</span>pop<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,],</span>
+<span id="cb162-6"><a href="#cb162-6" aria-hidden="true" tabindex="-1"></a>                        ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> measurement)) <span class="sc">+</span></span>
+<span id="cb162-7"><a href="#cb162-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">bins =</span>  <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb162-8"><a href="#cb162-8" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wang - relatedness"</span>,</span>
+<span id="cb162-9"><a href="#cb162-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Frequency"</span>)</span>
+<span id="cb162-10"><a href="#cb162-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hist.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>high.rel <span class="ot">&lt;-</span> plot.data<span class="fl">.1</span>pop[plot.data<span class="fl">.1</span>pop<span class="sc">$</span>measurement <span class="sc">&gt;</span> <span class="fl">0.2</span> <span class="sc">&amp;</span> </span>
-<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="fl">.1</span>pop<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,]</span>
-<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a>hist.plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(high.rel, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> measurement)) <span class="sc">+</span></span>
-<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">bins =</span>  <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb149-6"><a href="#cb149-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wang - relatedness"</span>,</span>
-<span id="cb149-7"><a href="#cb149-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Frequency"</span>)</span>
-<span id="cb149-8"><a href="#cb149-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hist.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>high.rel <span class="ot">&lt;-</span> plot.data<span class="fl">.1</span>pop[plot.data<span class="fl">.1</span>pop<span class="sc">$</span>measurement <span class="sc">&gt;</span> <span class="fl">0.2</span> <span class="sc">&amp;</span> </span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>                        plot.data<span class="fl">.1</span>pop<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"wang"</span>,]</span>
+<span id="cb163-3"><a href="#cb163-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-4"><a href="#cb163-4" aria-hidden="true" tabindex="-1"></a>hist.plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(high.rel, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> measurement)) <span class="sc">+</span></span>
+<span id="cb163-5"><a href="#cb163-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">bins =</span>  <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb163-6"><a href="#cb163-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wang - relatedness"</span>,</span>
+<span id="cb163-7"><a href="#cb163-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Frequency"</span>)</span>
+<span id="cb163-8"><a href="#cb163-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hist.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-45-2.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-46-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(high.rel[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)], </span>
-<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">longtable =</span> <span class="cn">TRUE</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>,<span class="at">font_size =</span> <span class="dv">9</span>, </span>
-<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"repeat_header"</span>, <span class="st">"hold_position"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(high.rel[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)], </span>
+<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">longtable =</span> <span class="cn">TRUE</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb164-3"><a href="#cb164-3" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>,<span class="at">font_size =</span> <span class="dv">9</span>, </span>
+<span id="cb164-4"><a href="#cb164-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"repeat_header"</span>, <span class="st">"hold_position"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -2406,8 +2489,8 @@ Exercise
 <h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <section id="bull-shark-1" class="level3">
 <h3 class="anchored" data-anchor-id="bull-shark-1">Bull Shark</h3>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-46_5898a943fe2dad6a1123bd208b5c9fca">
-<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/Bull_shark_DArTseq_genlight_for_Sex-linked_markers.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-47_8a4d5a39c2ec82cbca8b49c428095107">
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/Bull_shark_DArTseq_genlight_for_Sex-linked_markers.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.gl"</code></pre>
 </div>
@@ -2415,8 +2498,8 @@ Exercise
 </section>
 <section id="blue-shark-1" class="level3">
 <h3 class="anchored" data-anchor-id="blue-shark-1">Blue Shark</h3>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-47_86067f05fc066fc480c831cdbc7073d1">
-<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/Blue_shark_DArTseq_genlight_for_sex-linked_markers.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-48_ea1c1ed4f2c57738c98ad79d29314128">
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">load</span>(<span class="st">"data/Blue_shark_DArTseq_genlight_for_sex-linked_markers.Rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.gl"</code></pre>
 </div>
@@ -2430,8 +2513,8 @@ Exercise
 <figcaption class="figure-caption">Markers on X and Y chromosomes</figcaption>
 </figure>
 </div>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-48_ce39d00b5e6f8cad4c2ebb54e939b762">
-<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> dartR.sexlinked<span class="sc">::</span><span class="fu">gl.filter.sexlinked</span>(<span class="at">gl =</span> data.gl, <span class="at">system =</span> <span class="st">"xy"</span>, <span class="at">plots =</span> <span class="cn">TRUE</span>, <span class="at">ncores =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-49_b0ce9b03fa3f9bb1fdd30a2aa2bfad3f">
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> dartR.sexlinked<span class="sc">::</span><span class="fu">gl.filter.sexlinked</span>(<span class="at">gl =</span> data.gl, <span class="at">system =</span> <span class="st">"xy"</span>, <span class="at">plots =</span> <span class="cn">TRUE</span>, <span class="at">ncores =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Detected 104 females and 111 males.</code></pre>
 </div>
@@ -2442,7 +2525,7 @@ Exercise
 <pre><code>Building call rate plots.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Done. Starting phase 2.</code></pre>
@@ -2451,10 +2534,10 @@ Exercise
 <pre><code>Building heterozygosity plots.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-48-2.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-49-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-48-3.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-49-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Done building heterozygosity plots.</code></pre>
@@ -2469,21 +2552,21 @@ Found 26 sex-linked loci:
 And 172358 autosomal loci.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="main_code_files/figure-html/unnamed-chunk-48-4.png" class="img-fluid" width="672"></p>
+<p><img src="main_code_files/figure-html/unnamed-chunk-49-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="run-gl.infer.sex" class="level3">
 <h3 class="anchored" data-anchor-id="run-gl.infer.sex">Run <code>gl.infer.sex</code></h3>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-49_97bfbe220cfee643fdc3797c0bef01eb">
-<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>sexID <span class="ot">&lt;-</span> dartR.sexlinked<span class="sc">::</span><span class="fu">gl.infer.sex</span>(<span class="at">gl_sex_filtered =</span> res, <span class="at">system =</span> <span class="st">"xy"</span>, <span class="at">seed =</span> <span class="dv">124</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-50_8d23a4138fd5e9457e49c14a50dd4348">
+<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a>sexID <span class="ot">&lt;-</span> dartR.sexlinked<span class="sc">::</span><span class="fu">gl.infer.sex</span>(<span class="at">gl_sex_filtered =</span> res, <span class="at">system =</span> <span class="st">"xy"</span>, <span class="at">seed =</span> <span class="dv">124</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Not enough gametologs (need at least 5). Assigning NA...</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>***FINISHED***</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(sexID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(sexID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
@@ -2610,9 +2693,9 @@ And 172358 autosomal loci.</code></pre>
 </section>
 <section id="session-information" class="level1">
 <h1>Session information</h1>
-<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-50_f5aed4c2b7b64fcec29c81aae12f3721">
-<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">width =</span> <span class="dv">100</span>)</span>
-<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="main_code_cache/html/unnamed-chunk-51_2aeadc17f445c9eb15bf055a741cce89">
+<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">width =</span> <span class="dv">100</span>)</span>
+<span id="cb181-2"><a href="#cb181-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────────────────────────
  setting  value
@@ -2637,8 +2720,6 @@ And 172358 autosomal loci.</code></pre>
  base64enc         0.1-3      2015-07-28 [1] CRAN (R 4.2.0)
  bayesm            3.1-6      2023-09-23 [1] CRAN (R 4.2.3)
  BiocGenerics      0.44.0     2022-11-01 [1] Bioconductor
- boot              1.3-28.1   2022-11-22 [1] CRAN (R 4.2.3)
- broom             1.0.5      2023-06-09 [1] CRAN (R 4.2.3)
  cachem            1.0.8      2023-05-01 [1] CRAN (R 4.2.3)
  checkmate         2.3.1      2023-12-04 [1] CRAN (R 4.2.3)
  cli               3.6.2      2023-12-11 [1] CRAN (R 4.2.3)
@@ -2657,7 +2738,6 @@ And 172358 autosomal loci.</code></pre>
  DEoptimR          1.1-3      2023-10-07 [1] CRAN (R 4.2.3)
  devtools          2.4.5      2022-10-11 [1] CRAN (R 4.2.3)
  digest            0.6.34     2024-01-11 [1] CRAN (R 4.2.3)
- directlabels      2024.1.21  2024-01-24 [1] CRAN (R 4.2.1)
  diveRsity       * 1.9.90     2024-01-19 [1] Github (kkeenan02/diveRsity@17d00ad)
  doParallel        1.0.17     2022-02-07 [1] CRAN (R 4.2.1)
  dplyr           * 1.1.4      2023-11-17 [1] CRAN (R 4.2.3)
@@ -2679,12 +2759,10 @@ And 172358 autosomal loci.</code></pre>
  ggplot2         * 3.4.4      2023-10-12 [1] CRAN (R 4.2.3)
  ggtern          * 3.3.5      2021-07-23 [1] Github (mijangos81/ggtern@23fa82a)
  glasso            1.11       2019-10-01 [1] CRAN (R 4.2.0)
- glmnet            4.1-8      2023-08-22 [1] CRAN (R 4.2.3)
  glue              1.7.0      2024-01-09 [1] CRAN (R 4.2.3)
  gridExtra         2.3        2017-09-09 [1] CRAN (R 4.2.1)
  gtable            0.3.4      2023-08-21 [1] CRAN (R 4.2.3)
  gtools            3.9.5      2023-11-20 [1] CRAN (R 4.2.3)
- HardyWeinberg     1.7.5      2022-05-07 [1] CRAN (R 4.2.3)
  highr             0.10       2022-12-22 [1] CRAN (R 4.2.3)
  Hmisc             5.1-1      2023-09-12 [1] CRAN (R 4.2.3)
  hms               1.1.3      2023-03-21 [1] CRAN (R 4.2.3)
@@ -2694,7 +2772,6 @@ And 172358 autosomal loci.</code></pre>
  httpuv            1.6.13     2023-12-06 [1] CRAN (R 4.2.3)
  igraph            1.6.0      2023-12-11 [1] CRAN (R 4.2.3)
  iterators         1.0.14     2022-02-05 [1] CRAN (R 4.2.1)
- jomo              2.7-6      2023-04-15 [1] CRAN (R 4.2.3)
  jpeg              0.1-10     2022-11-29 [1] CRAN (R 4.2.2)
  jsonlite          1.8.8      2023-12-04 [1] CRAN (R 4.2.3)
  kableExtra        1.4.0      2024-01-24 [1] CRAN (R 4.2.1)
@@ -2705,25 +2782,19 @@ And 172358 autosomal loci.</code></pre>
  lattice           0.22-5     2023-10-24 [1] CRAN (R 4.2.3)
  lavaan            0.6-17     2023-12-20 [1] CRAN (R 4.2.3)
  lifecycle         1.0.4      2023-11-07 [1] CRAN (R 4.2.3)
- lme4              1.1-35.1   2023-11-05 [1] CRAN (R 4.2.3)
  lubridate       * 1.9.3      2023-09-27 [1] CRAN (R 4.2.3)
  magrittr          2.0.3      2022-03-30 [1] CRAN (R 4.2.1)
  MASS              7.3-60.0.1 2024-01-13 [1] CRAN (R 4.2.3)
  Matrix          * 1.6-5      2024-01-11 [1] CRAN (R 4.2.3)
  memoise           2.0.1      2021-11-26 [1] CRAN (R 4.2.3)
  mgcv              1.9-1      2023-12-21 [1] CRAN (R 4.2.3)
- mice              3.16.0     2023-06-05 [1] CRAN (R 4.2.3)
  mime              0.12       2021-09-28 [1] CRAN (R 4.2.0)
  miniUI            0.1.1.1    2018-05-18 [1] CRAN (R 4.2.3)
- minqa             1.2.6      2023-09-11 [1] CRAN (R 4.2.3)
- mitml             0.4-5      2023-03-08 [1] CRAN (R 4.2.3)
  mnormt            2.1.1      2022-09-26 [1] CRAN (R 4.2.1)
  munsell           0.5.0      2018-06-12 [1] CRAN (R 4.2.1)
  networkD3         0.4        2017-03-18 [1] CRAN (R 4.2.3)
  nlme              3.1-164    2023-11-27 [1] CRAN (R 4.2.3)
- nloptr            2.0.3      2022-05-26 [1] CRAN (R 4.2.3)
  nnet              7.3-19     2023-05-03 [1] CRAN (R 4.2.3)
- pan               1.9        2023-08-21 [1] CRAN (R 4.2.3)
  patchwork         1.2.0      2024-01-08 [1] CRAN (R 4.2.3)
  pbapply           1.7-2      2023-06-27 [1] CRAN (R 4.2.3)
  pbivnorm          0.6.0      2015-01-23 [1] CRAN (R 4.2.0)
@@ -2754,12 +2825,10 @@ And 172358 autosomal loci.</code></pre>
  rmarkdown         2.25       2023-09-18 [1] CRAN (R 4.2.3)
  robustbase        0.99-1     2023-11-29 [1] CRAN (R 4.2.3)
  rpart             4.1.23     2023-12-05 [1] CRAN (R 4.2.3)
- Rsolnp            1.16       2015-12-28 [1] CRAN (R 4.2.3)
  rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.2.3)
  scales            1.3.0      2023-11-28 [1] CRAN (R 4.2.3)
  seqinr            4.2-36     2023-12-08 [1] CRAN (R 4.2.3)
  sessioninfo       1.2.2      2021-12-06 [1] CRAN (R 4.2.3)
- shape             1.4.6      2021-05-19 [1] CRAN (R 4.2.0)
  shiny             1.8.0      2023-11-17 [1] CRAN (R 4.2.3)
  SNPRelate         1.36.1     2024-01-25 [1] Github (zhengxwen/SNPRelate@19af345)
  snpStats        * 1.48.0     2022-11-01 [1] Bioconductor
@@ -2775,7 +2844,6 @@ And 172358 autosomal loci.</code></pre>
  tidyselect        1.2.0      2022-10-10 [1] CRAN (R 4.2.3)
  tidyverse       * 2.0.0      2023-02-22 [1] CRAN (R 4.2.3)
  timechange        0.3.0      2024-01-18 [1] CRAN (R 4.2.3)
- truncnorm         1.0-9      2023-03-20 [1] CRAN (R 4.2.3)
  tzdb              0.4.0      2023-05-12 [1] CRAN (R 4.2.3)
  urlchecker        1.0.1      2021-11-30 [1] CRAN (R 4.2.3)
  usethis           2.2.2      2023-07-06 [1] CRAN (R 4.2.3)
