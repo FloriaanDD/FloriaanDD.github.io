@@ -4,7 +4,7 @@ project:
 book:
   title: OCS2024 - Exploring the genome - an overview of tools and applications for the modern Chondrichthyes ecologist
   author: Floriaan Devloo-Delva and Madeline Green
-  date: 03/02/2024
+  date: 04/02/2024
   chapters:
   - index.qmd
   - install.qmd
