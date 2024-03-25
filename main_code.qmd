@@ -324,7 +324,7 @@ There are several factors that can cause deviations from Hardy-Weinberg proporti
 -   Non-random sampling
 -   Genotyping errors
 
-Therefore, testing for Hardy-Weinberg proportions should be a process that involves a careful evaluation of the results, a good place to start is Waples (2015). Note that tests for H-W proportions are only valid if there is no population substructure (assuming random mating) and have sufficient power only when there is sufficient sample size (n individuals \> 15).
+Therefore, testing for Hardy-Weinberg proportions should be a process that involves a careful evaluation of the results, a good place to start is @waples_hwe. Note that tests for H-W proportions are only valid if there is no population substructure (assuming random mating) and have sufficient power only when there is sufficient sample size (n individuals \> 15).
 :::
 
 :::{.panel-tabset}
@@ -610,7 +610,7 @@ outliers$outflank$numberHighFstOutliers
 
 **Better at detecting weak selective pressures**
 
-Here, we illustrate the use of ***Redundancy Analysis (RDA)*** as a genotype-environment association (GEA) method to detect loci under selection (Forester et al., 2018). RDA is a multivariate ordination technique that can be used to analyze many loci and environmental predictors simultaneously. RDA determines how groups of loci co-vary in response to the multivariate environment, and can detect processes that result in weak, multilocus molecular signatures (Forester et al., 2018).
+Here, we illustrate the use of ***Redundancy Analysis (RDA)*** as a genotype-environment association (GEA) method to detect loci under selection [@forester_gea]. RDA is a multivariate ordination technique that can be used to analyze many loci and environmental predictors simultaneously. RDA determines how groups of loci co-vary in response to the multivariate environment, and can detect processes that result in weak, multilocus molecular signatures [@forester_gea].
 
 More information here: [Detecting multilocus adaptation using Redundancy Analysis (RDA)](https://popgen.nescent.org/2018-03-27_RDA_GEA.html)
 

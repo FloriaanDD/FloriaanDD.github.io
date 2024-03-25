@@ -1192,7 +1192,7 @@ Warning
 <li>Non-random sampling</li>
 <li>Genotyping errors</li>
 </ul>
-<p>Therefore, testing for Hardy-Weinberg proportions should be a process that involves a careful evaluation of the results, a good place to start is Waples (2015). Note that tests for H-W proportions are only valid if there is no population substructure (assuming random mating) and have sufficient power only when there is sufficient sample size (n individuals &gt; 15).</p>
+<p>Therefore, testing for Hardy-Weinberg proportions should be a process that involves a careful evaluation of the results, a good place to start is <span class="citation" data-cites="waples_hwe">Waples (<a href="references.html#ref-waples_hwe" role="doc-biblioref">2015</a>)</span>. Note that tests for H-W proportions are only valid if there is no population substructure (assuming random mating) and have sufficient power only when there is sufficient sample size (n individuals &gt; 15).</p>
 </div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -1808,7 +1808,7 @@ Calculating FSTs, may take a few minutes...</code></pre>
 <section id="genotype-environment-associations" class="level2">
 <h2 class="anchored" data-anchor-id="genotype-environment-associations">Genotype-Environment associations</h2>
 <p><strong>Better at detecting weak selective pressures</strong></p>
-<p>Here, we illustrate the use of <strong><em>Redundancy Analysis (RDA)</em></strong> as a genotype-environment association (GEA) method to detect loci under selection (Forester et al., 2018). RDA is a multivariate ordination technique that can be used to analyze many loci and environmental predictors simultaneously. RDA determines how groups of loci co-vary in response to the multivariate environment, and can detect processes that result in weak, multilocus molecular signatures (Forester et al., 2018).</p>
+<p>Here, we illustrate the use of <strong><em>Redundancy Analysis (RDA)</em></strong> as a genotype-environment association (GEA) method to detect loci under selection <span class="citation" data-cites="forester_gea">(<a href="references.html#ref-forester_gea" role="doc-biblioref">Forester et al. 2018</a>)</span>. RDA is a multivariate ordination technique that can be used to analyze many loci and environmental predictors simultaneously. RDA determines how groups of loci co-vary in response to the multivariate environment, and can detect processes that result in weak, multilocus molecular signatures <span class="citation" data-cites="forester_gea">(<a href="references.html#ref-forester_gea" role="doc-biblioref">Forester et al. 2018</a>)</span>.</p>
 <p>More information here: <a href="https://popgen.nescent.org/2018-03-27_RDA_GEA.html">Detecting multilocus adaptation using Redundancy Analysis (RDA)</a></p>
 <div class="cell" data-hash="main_code_cache/html/unnamed-chunk-40_aa9d77e4d50307bd00fd5dd4bcd2692e">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>data.gl.imputed <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl.impute</span>(data.gl, <span class="at">parallel =</span> <span class="cn">FALSE</span>) <span class="co"># no missing data allowed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2840,6 +2840,9 @@ Devloo-Delva, Floriaan, Thierry Gosselin, Paul A Butcher, Peter M Grewe, Charlie
 <div id="ref-feutry_glyphis" class="csl-entry" role="listitem">
 Feutry, Pierre, Floriaan Devloo-Delva, Adrien Tran Lu Y, Stefano Mona, Rasanthi M. Gunasekera, Grant Johnson, Richard D. Pillans, et al. 2020. <span>“One Panel to Rule Them All: DArTcap Genotyping for Population Structure, Historical Demography, and Kinship Analyses, and Its Application to a Threatened Shark.”</span> Journal Article. <em>Molecular Ecology Resources</em> 20 (6): 1470–85. <a href="https://doi.org/10.1111/1755-0998.13204">https://doi.org/10.1111/1755-0998.13204</a>.
 </div>
+<div id="ref-forester_gea" class="csl-entry" role="listitem">
+Forester, Brenna R, Jesse R Lasky, Helene H Wagner, and Dean L Urban. 2018. <span>“Comparing Methods for Detecting Multilocus Adaptation with Multivariate Genotype–Environment Associations.”</span> Journal Article. <em>Molecular Ecology</em> 27 (9): 2215–33.
+</div>
 <div id="ref-Georges2023" class="csl-entry" role="listitem">
 Georges, Arthur, Luis Mijangos, Andrzej Kilian, Hardip Patel, Mark Aitkens, and Bernd Gruber. 2023. <span>“Distances and Their Visualization in Studies of Spatial-Temporal Genetic Variation Using Single Nucleotide Polymorphisms (SNPs).”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/2023.03.22.533737">https://doi.org/10.1101/2023.03.22.533737</a>.
 </div>
@@ -2850,7 +2853,7 @@ Goudet, Jérôme, Tomas Kay, and Bruce S. Weir. 2018. <span>“How to Estimate K
 Gruber, B., P. J. Unmack, O. F. Berry, and A. Georges. 2018. <span>“Dartr: An r Package to Facilitate Analysis of SNP Data Generated from Reduced Representation Genome Sequencing.”</span> Journal Article. <em>Molecular Ecology Resources</em> 18 (3): 691–99. <a href="https://doi.org/10.1111/1755-0998.12745">https://doi.org/10.1111/1755-0998.12745</a>.
 </div>
 <div id="ref-jost2008gst" class="csl-entry" role="listitem">
-Jost, Lou. 2008. <span>“GST and Its Relatives Do Not Measure Differentiation.”</span> <em>Molecular Ecology</em> 17 (18): 4015–26.
+Jost, Lou. 2008. <span>“GST and Its Relatives Do Not Measure Differentiation.”</span> <em>Molecular Ecology</em> 17 (18): 4015–26. <a href="https://doi.org/10.1111/j.1365-294X.2008.03887.x">https://doi.org/10.1111/j.1365-294X.2008.03887.x</a>.
 </div>
 <div id="ref-mijangos_dartr2" class="csl-entry" role="listitem">
 Mijangos, Jose Luis, Bernd Gruber, Oliver Berry, Carlo Pacioni, and Arthur Georges. 2022. <span>“dartR V2: An Accessible Genetic Analysis Platform for Conservation, Ecology and Agriculture.”</span> Journal Article. <em>Methods in Ecology and Evolution</em> 13 (10): 2150–58. https://doi.org/<a href="https://doi.org/10.1111/2041-210X.13918">https://doi.org/10.1111/2041-210X.13918</a>.
@@ -2865,16 +2868,19 @@ Pew, Jack, Paul H Muir, Jinliang Wang, and Timothy R Frasier. 2015. <span>“Rel
 Robledo-Ruiz, Diana A., Lana Austin, J. Nevil Amos, Jesús Castrejón-Figueroa, Daniel K. P. Harley, Michael J. L. Magrath, Paul Sunnucks, and Alexandra Pavlova. 2023. <span>“Easy-to-Use r Functions to Separate Reduced-Representation Genomic Datasets into Sex-Linked&nbsp;and Autosomal Loci, and Conduct Sex Assignment.”</span> Journal Article. <em>Molecular Ecology Resources</em> 00: 1–21. https://doi.org/<a href="https://doi.org/10.1111/1755-0998.13844">https://doi.org/10.1111/1755-0998.13844</a>.
 </div>
 <div id="ref-sherwin" class="csl-entry" role="listitem">
-Sherwin, William B, Anne Chao, Lou Jost, and Peter E Smouse. 2017. <span>“Information Theory Broadens the Spectrum of Molecular Ecology and Evolution.”</span> Journal Article. <em>Trends in Ecology &amp; Evolution</em> 32 (12): 948–63.
+Sherwin, William B, Anne Chao, Lou Jost, and Peter E Smouse. 2017. <span>“Information Theory Broadens the Spectrum of Molecular Ecology and Evolution.”</span> Journal Article. <em>Trends in Ecology &amp; Evolution</em> 32 (12): 948–63. https://doi.org/<a href="https://doi.org/10.1016/j.tree.2017.09.012">https://doi.org/10.1016/j.tree.2017.09.012</a>.
 </div>
 <div id="ref-speed2015_relatedness" class="csl-entry" role="listitem">
-Speed, Doug, and David J Balding. 2015. <span>“Relatedness in the Post-Genomic Era: Is It Still Useful?”</span> <em>Nature Reviews Genetics</em> 16 (1): 33–44.
+Speed, Doug, and David J Balding. 2015. <span>“Relatedness in the Post-Genomic Era: Is It Still Useful?”</span> <em>Nature Reviews Genetics</em> 16 (1): 33–44. <a href="https://doi.org/10.1038/nrg3821">https://doi.org/10.1038/nrg3821</a>.
 </div>
 <div id="ref-sundqvist_divmigrate" class="csl-entry" role="listitem">
-Sundqvist, Lisa, Kevin Keenan, Martin Zackrisson, Paulo Prodöhl, and David Kleinhans. 2016. <span>“Directional Genetic Differentiation and Relative Migration.”</span> <em>Ecology and Evolution</em> 6 (11): 3461–75.
+Sundqvist, Lisa, Kevin Keenan, Martin Zackrisson, Paulo Prodöhl, and David Kleinhans. 2016. <span>“Directional Genetic Differentiation and Relative Migration.”</span> <em>Ecology and Evolution</em> 6 (11): 3461–75. https://doi.org/<a href="https://doi.org/10.1002/ece3.2096">https://doi.org/10.1002/ece3.2096</a>.
 </div>
 <div id="ref-wang2022_kinship" class="csl-entry" role="listitem">
-Wang, Yuhua. 2022. <span>“Blood Is Thicker Than Water: Elite Kinship Networks and State Building in Imperial China.”</span> <em>American Political Science Review</em> 116 (3): 896–910.
+Wang, Jinliang. 2022. <span>“A Joint Likelihood Estimator of Relatedness and Allele Frequencies from a Small Sample of Individuals.”</span> <em>Methods in Ecology and Evolution</em> 13 (11): 2443–62. https://doi.org/<a href="https://doi.org/10.1111/2041-210X.13963">https://doi.org/10.1111/2041-210X.13963</a>.
+</div>
+<div id="ref-waples_hwe" class="csl-entry" role="listitem">
+Waples, R. S. 2015. <span>“Testing for Hardy-Weinberg Proportions: Have We Lost the Plot?”</span> Journal Article. <em>Journal of Heredity</em> 106 (1): 1–19. <a href="https://doi.org/10.1093/jhered/esu062">https://doi.org/10.1093/jhered/esu062</a>.
 </div>
 <div id="ref-whitlock_outliers" class="csl-entry" role="listitem">
 Whitlock, M. C., and K. E. Lotterhos. 2015. <span>“Reliable Detection of Loci Responsible for Local Adaptation: Inference of a Null Model Through Trimming the Distribution of Fst.”</span> Journal Article. <em>The American Naturalist</em> 186 (S1): S24–36. <a href="https://doi.org/10.1086/682949">https://doi.org/10.1086/682949</a>.
