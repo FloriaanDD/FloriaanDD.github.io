@@ -53,7 +53,7 @@ A variety of things to learn!
 
 DartR published first by @gruber_dartr, and dartR V2 published by @mijangos_dartr2
 
-The code presented here was developed by a group a people for the population genetic workshop in Kioloa. We express our sincere thanks to the following people for making this code available: **Arthur Georges, Bernd Gruber, Luis Mijangos, Renee Catullo, Oliver Berry, Andrzej Killian, Jason Carling, Andrew Kowalczyk, Bill Sherwin, Carlo Pacioni, Robyn Shaw, Catherine Grueber, Kate Farquharson, Luciano Beheregaray, Chris Brauer, Jonathan Sandoval-Castillo, Sally Potter, Craig Moritz, Diana Robledo-Ruiz, Natasha Marosi, Jinliang Wang**.
+The code presented here was developed by a group a people for the population genetic workshop in Kioloa. We express our sincere thanks to the following people for making this code available: **Arthur Georges, Bernd Gruber, Luis Mijangos, Renee Catullo, Oliver Berry, Andrzej Killian, Jason Carling, Andrew Kowalczyk, Jason Dobry, Bill Sherwin, Carlo Pacioni, Robyn Shaw, Catherine Grueber, Kate Farquharson, Luciano Beheregaray, Chris Brauer, Jonathan Sandoval-Castillo, Sally Potter, Craig Moritz, Diana Robledo-Ruiz, Natasha Marosi, Jinliang Wang**.
 
 ![](images/funders_stakeholders.png)
 
